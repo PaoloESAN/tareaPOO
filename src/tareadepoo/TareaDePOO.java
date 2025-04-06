@@ -5,10 +5,17 @@ import com.formdev.flatlaf.FlatDarculaLaf;
 import ejercicioavanzado.GESTION_PERSONAL;
 import javax.swing.UIManager;
 
+
+
+/*  Adaptar la solución anterior para el caso de una Universidad que admite dos tipos de entidades o clases: 
+    TAlumno y TDocente.
+    Implementar una solución visual usando controles SWING*/
+
+
 public class TareaDePOO {
 
     public static void main(String[] args) {
-        gestion();
+        ventana();
     }
     
     public static void gestion(){
