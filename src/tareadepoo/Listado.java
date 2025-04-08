@@ -53,6 +53,7 @@ public class Listado extends javax.swing.JFrame {
         tablaDoc = new javax.swing.JTable();
         radAlum = new javax.swing.JRadioButton();
         radDocen = new javax.swing.JRadioButton();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -117,6 +118,7 @@ public class Listado extends javax.swing.JFrame {
             }
         });
         getContentPane().add(radDocen, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, -1, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 430));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -219,6 +221,7 @@ public class Listado extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JRadioButton radAlum;
