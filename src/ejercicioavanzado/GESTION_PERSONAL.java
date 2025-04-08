@@ -14,7 +14,7 @@ private static int W = 129;
 
     public GESTION_PERSONAL(){
     try {
-        main(new String[]{});
+        menu(new String[]{});
     } catch (IOException | InterruptedException ex) {
         Logger.getLogger(GESTION_PERSONAL.class.getName()).log(Level.SEVERE, null, ex);
     }
@@ -123,7 +123,7 @@ String CAD;
       return CAD.charAt(0);
 }
 //-----------------------------------------------
-public static void main(String[] args) throws IOException, InterruptedException {
+public static void menu(String[] args) throws IOException, InterruptedException {
 int nn;
 char OPCION='?';
 String CAD;
