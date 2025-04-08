@@ -1,10 +1,20 @@
 [
     {
-        "fechaNacimiento": "07/07/1997",
-        "direccion": "las sillas",
-        "telefono": "123321412",
+        "fechaNacimiento": "07/08/1999",
+        "direccion": "las calles",
+        "telefono": "123412425",
         "sexo": "Mujer",
-        "dni": "70121345",
+        "profesion": "ingeniero",
+        "dni": "41154232",
+        "apellidosNombres": "ape ape nom nom"
+    },
+    {
+        "fechaNacimiento": "06/09/1996",
+        "direccion": "las mesas",
+        "telefono": "421524365",
+        "sexo": "Otro",
+        "profesion": "medice",
+        "dni": "85963212",
         "apellidosNombres": "ape ape nom nom"
     }
 ]

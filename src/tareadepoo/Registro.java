@@ -272,7 +272,7 @@ public class Registro extends javax.swing.JFrame {
             obj.put("telefono", persona.Obtener_TELEFONO());
             obj.put("direccion", persona.Obtener_DIRECCION());
             obj.put("sexo", persona.Obtener_SEXO());
-            if (filename.equals("docente.json")) {
+            if (filename.equals("docentes.json")) {
                 obj.put("profesion", persona.Obtener_PROFESION());
             }
 
