@@ -25,9 +25,10 @@ public class Listado extends javax.swing.JFrame {
      */
     public Listado() {
         initComponents();
-        modelo = (DefaultTableModel) tabla.getModel();
+        modelo = (DefaultTableModel) tablaAlum.getModel();
         modelo.addRow(new Object[]{1, "Ana", 20});
         modelo.addRow(new Object[]{2, "Luis", 22});
+        jScrollPane2.setVisible(false);
     }
 
     /**
@@ -39,34 +40,35 @@ public class Listado extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabla = new javax.swing.JTable();
+        tablaAlum = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaDoc = new javax.swing.JTable();
+        radAlum = new javax.swing.JRadioButton();
+        radDocen = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Listado de personas");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, 223, -1));
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton2.setText("Volver");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        tabla.setModel(new javax.swing.table.DefaultTableModel(
+        tablaAlum.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "DNI", "Apellidos y nombres", "Fecha de nacimiento", "Telefono", "Direccion", "Sexo", "Profesion"
+                "DNI", "Apellidos y nombres", "Fecha de nacimiento", "Telefono", "Direccion", "Sexo"
             }
         ));
-        jScrollPane1.setViewportView(tabla);
+        jScrollPane1.setViewportView(tablaAlum);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 810, 240));
 
         jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton3.setText("Actualizar");
@@ -75,43 +77,52 @@ public class Listado extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 620, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(283, 283, 283)
-                .addComponent(jButton2)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 810, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 14, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(297, 297, 297)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3)
-                        .addContainerGap(20, Short.MAX_VALUE))))
-        );
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton2.setText("Volver");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 640, -1, -1));
+
+        tablaDoc.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "DNI", "Apellidos y nombres", "Fecha de nacimiento", "Telefono", "Direccion", "Sexo", "Profesion"
+            }
+        ));
+        jScrollPane2.setViewportView(tablaDoc);
+        if (tablaDoc.getColumnModel().getColumnCount() > 0) {
+            tablaDoc.getColumnModel().getColumn(6).setHeaderValue("Profesion");
+        }
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 810, 240));
+
+        buttonGroup1.add(radAlum);
+        radAlum.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        radAlum.setSelected(true);
+        radAlum.setText("Alumno");
+        radAlum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radAlumActionPerformed(evt);
+            }
+        });
+        getContentPane().add(radAlum, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, -1, -1));
+
+        buttonGroup1.add(radDocen);
+        radDocen.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        radDocen.setText("Docente");
+        radDocen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radDocenActionPerformed(evt);
+            }
+        });
+        getContentPane().add(radDocen, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -124,6 +135,20 @@ public class Listado extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         modelo.setRowCount(0);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void radAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radAlumActionPerformed
+        if (radAlum.isSelected()) {
+            jScrollPane2.setVisible(false);
+            jScrollPane1.setVisible(true);
+        }
+    }//GEN-LAST:event_radAlumActionPerformed
+
+    private void radDocenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radDocenActionPerformed
+        if (radDocen.isSelected()) {
+            jScrollPane1.setVisible(false);
+            jScrollPane2.setVisible(true);
+        }
+    }//GEN-LAST:event_radDocenActionPerformed
     private void rellenarTabla(){
         
     }
@@ -163,10 +188,15 @@ public class Listado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabla;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JRadioButton radAlum;
+    private javax.swing.JRadioButton radDocen;
+    private javax.swing.JTable tablaAlum;
+    private javax.swing.JTable tablaDoc;
     // End of variables declaration//GEN-END:variables
 }

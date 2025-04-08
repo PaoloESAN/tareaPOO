@@ -233,7 +233,7 @@ public class Registro extends javax.swing.JFrame {
             datosP.Establecer_DIRECCION(txtDirec.getText());
             datosP.Establecer_SEXO(combSex.getSelectedItem().toString());
             String linea = datosP.datosCompletos(radDocen.isSelected());
-            LIB.WriteDataFile("PERSONAL.DAT", linea + LIB.Replicate(' ',129 - linea.length()));
+            LIB.WriteDataFile("PERSONAL.DAT", linea + "\n");
             JOptionPane.showMessageDialog(rootPane, "Se registro correctamente");
             limpiar();
         }

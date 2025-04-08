@@ -261,7 +261,7 @@ String LINE="",CADENA="";
 }
 //-----------------------------------------------
 public byte[] StringToBuffer(String CADENA) {
-byte[] BUFFER = new byte[W];
+byte[] BUFFER = new byte[CADENA.length()];
 int L = CADENA.length();
     for(int i=0;i<=L-1;i++) {
         BUFFER[i] = (byte)CADENA.charAt(i);
@@ -283,9 +283,7 @@ long T,N;
 byte[] BUFFER = StringToBuffer(DATA);
    try {
      RandomAccessFile RAF = new RandomAccessFile(FILENAME,"rw");
-     T = RAF.length();
-     N = T/W;
-     RAF.seek(N*W);
+     RAF.seek(RAF.length());
      RAF.write(BUFFER);
      RAF.close();
    }
