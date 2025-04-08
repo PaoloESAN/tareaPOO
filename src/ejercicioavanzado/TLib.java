@@ -148,28 +148,18 @@ int P,T,L,YEAR,MONTH,DAY,TOTAL=0;
                       }
                       Sw = ((1<=DAY)&&(DAY<=TOTAL));
                       if(!Sw) {
-                          System.out.println("ERROR: El Dia es Incorrecto!!!"); 
+                          
                       }
                    }
-                   else {
-                       System.out.println("ERROR: El Mes es Incorrecto!!!");
-                   }
+                   
                }
-               else {
-                   System.out.println("ERROR: El Año es Incorrecto!!!");
-               }
+               
            }
-           else {
-               System.out.println("ERROR: Existen Caracteres No Numericos");
-           }
+           
        }
-       else {
-           System.out.println("ERROR: Los Delimitadores de Fecha son incorrectos!!!");
-       }
+       
     }
-    else {
-         System.out.println("ERROR: Longitud/Tamaño de Fecha es Incorrecta!!!");
-    }
+    
     return Sw;
 }
 //-----------------------------------------------
@@ -185,19 +175,19 @@ boolean Sw;
           }
           else {
               if(HKGZ.length()>0) {
-                 System.out.println("ERROR: " + HKGZ + " contiene caracteres incorrectos!!!");
+                 
               }
           }
        }
        else {
           if(HKGZ.length()>0) {
-             System.out.println("ERROR: " + HKGZ + " tiene Longitud Incorrecta!!!");
+             
           }
        }
     }
     else {
        if(HKGZ.length()>0) {
-          System.out.println("ERROR: " + HKGZ + " tiene Longitud 0!!!");
+          
        }
     }
     return Sw;
