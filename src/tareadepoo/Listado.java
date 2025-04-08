@@ -4,7 +4,11 @@
  */
 package tareadepoo;
 
+import java.io.File;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -18,16 +22,16 @@ public class Listado extends javax.swing.JFrame {
         this.principal = principal;
     }
     
-    DefaultTableModel modelo;
+    DefaultTableModel modeloAlum;
+    DefaultTableModel modeloDoc;
             
     /**
      * Creates new form Listado
      */
     public Listado() {
         initComponents();
-        modelo = (DefaultTableModel) tablaAlum.getModel();
-        modelo.addRow(new Object[]{1, "Ana", 20});
-        modelo.addRow(new Object[]{2, "Luis", 22});
+        modeloAlum = (DefaultTableModel) tablaAlum.getModel();
+        modeloDoc = (DefaultTableModel) tablaDoc.getModel();
         jScrollPane2.setVisible(false);
     }
 
@@ -44,7 +48,6 @@ public class Listado extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaAlum = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaDoc = new javax.swing.JTable();
@@ -70,15 +73,6 @@ public class Listado extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 810, 240));
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton3.setText("Actualizar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 620, -1, -1));
-
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton2.setText("Volver");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -86,7 +80,7 @@ public class Listado extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 640, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 380, -1, -1));
 
         tablaDoc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -101,7 +95,7 @@ public class Listado extends javax.swing.JFrame {
             tablaDoc.getColumnModel().getColumn(6).setHeaderValue("Profesion");
         }
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 810, 240));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 810, 240));
 
         buttonGroup1.add(radAlum);
         radAlum.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -132,10 +126,6 @@ public class Listado extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        modelo.setRowCount(0);
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void radAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radAlumActionPerformed
         if (radAlum.isSelected()) {
             jScrollPane2.setVisible(false);
@@ -149,8 +139,46 @@ public class Listado extends javax.swing.JFrame {
             jScrollPane2.setVisible(true);
         }
     }//GEN-LAST:event_radDocenActionPerformed
-    private void rellenarTabla(){
+    public void rellenarAmbas(){
+        modeloAlum.setRowCount(0);
+        modeloDoc.setRowCount(0);
+        rellenarTabla("alumnos.json");
+        rellenarTabla("docentes.json");
+    }
+    
+    private void rellenarTabla(String ruta){
+            
+        File archivo = new File(ruta);
+
+        if (!archivo.exists()) {
+            return;
+        }
         
+        try {
+            String jsonStr = new String(java.nio.file.Files.readAllBytes(java.nio.file.Paths.get(ruta)));
+
+            JSONArray arreglo = new JSONArray(jsonStr);
+
+            for (int i = 0; i < arreglo.length(); i++) {
+                JSONObject persona = arreglo.getJSONObject(i);
+                String nombre = persona.getString("dni");
+                String apellidosNombres = persona.getString("apellidosNombres");
+                String ciudad = persona.getString("fechaNacimiento");
+                String telefono = persona.getString("telefono");
+                String direccion = persona.getString("direccion");
+                String sexo = persona.getString("sexo");
+                if(ruta.equals("docentes.json")){
+                    String profesion = persona.getString("profesion");
+                    modeloDoc.addRow(new Object[]{nombre, apellidosNombres, ciudad,telefono,direccion,sexo,profesion});
+                }else{
+                    modeloAlum.addRow(new Object[]{nombre, apellidosNombres, ciudad,telefono,direccion,sexo});
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al leer el JSON");
+        }
     }
     /**
      * @param args the command line arguments
@@ -190,7 +218,6 @@ public class Listado extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

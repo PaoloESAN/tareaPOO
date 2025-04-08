@@ -113,6 +113,7 @@ public class Principal extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         lista.setPrincipal(this);
         lista.setVisible(true);
+        lista.rellenarAmbas();
         this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
 
