@@ -5,7 +5,13 @@
 package tareadepoo;
 
 import ejercicioavanzado.TLib;
+import java.io.File;
+import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import javax.swing.JOptionPane;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -223,22 +229,65 @@ public class Registro extends javax.swing.JFrame {
         if (!(respuesta == "")) {
             JOptionPane.showMessageDialog(rootPane, respuesta);
         }else{
-            if (radDocen.isSelected()) {
-                datosP.Establecer_PROFESION(txtProf.getText());
-            }
             datosP.Establecer_DNI(txtDni.getText());
             datosP.Establecer_APENOM(txtNomApe.getText());
             datosP.Establecer_FECNAC(txtNacim.getText());
             datosP.Establecer_TELEFONO(txtTelef.getText());
             datosP.Establecer_DIRECCION(txtDirec.getText());
-            datosP.Establecer_SEXO(combSex.getSelectedItem().toString());
-            String linea = datosP.datosCompletos(radDocen.isSelected());
-            LIB.WriteDataFile("PERSONAL.DAT", linea + "\n");
+            datosP.Establecer_SEXO((String) combSex.getSelectedItem());
+            if (radDocen.isSelected()) {
+                datosP.Establecer_PROFESION(txtProf.getText());
+                guardarJson("docentes.json",datosP);
+            }else{
+                 guardarJson("alumnos.json",datosP);
+            }
             JOptionPane.showMessageDialog(rootPane, "Se registro correctamente");
             limpiar();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    
+        public static void guardarJson(String filename, DatosPersona persona) {
+        JSONArray personasArray;
+
+        try {
+            File archivo = new File(filename);
+            
+            if (archivo.exists() && archivo.length() > 0) {
+                
+                String contenido = new String(Files.readAllBytes(Paths.get(filename)));
+                
+                personasArray = new JSONArray(contenido);
+                
+            } else {
+                
+                personasArray = new JSONArray();
+                
+            }
+
+            JSONObject obj = new JSONObject();
+            obj.put("dni", persona.Obtener_DNI());
+            obj.put("apellidosNombres", persona.Obtener_APENOM());
+            obj.put("fechaNacimiento", persona.Obtener_FECNAC());
+            obj.put("telefono", persona.Obtener_TELEFONO());
+            obj.put("direccion", persona.Obtener_DIRECCION());
+            obj.put("sexo", persona.Obtener_SEXO());
+            if (filename.equals("docente.json")) {
+                obj.put("profesion", persona.Obtener_PROFESION());
+            }
+
+            personasArray.put(obj);
+
+            try (FileWriter file = new FileWriter(filename)) {
+                file.write(personasArray.toString(4));
+                file.flush();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     private void limpiar(){
         txtProf.setText("");
         txtNacim.setText("");

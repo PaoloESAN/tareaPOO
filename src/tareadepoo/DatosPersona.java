@@ -11,7 +11,7 @@ private String APENOM;
 private String FECNAC;
 private String TELEFONO;
 private String DIRECCION;
-private char SEXO;
+private String SEXO;
 private double SALARIO;
 private String PROFESION;
 //----------------------------------
@@ -38,7 +38,7 @@ public void Establecer_DIRECCION(String direccion) {
     this.DIRECCION = direccion;
 }
 public void Establecer_SEXO(String CAD) {  //char sexo
-    this.SEXO = CAD.charAt(0);
+    this.SEXO = CAD;
 }
 public void Establecer_SALARIO(String CAD) {  //double salario
     this.SALARIO = Double.parseDouble(CAD);
@@ -64,7 +64,7 @@ public String Obtener_TELEFONO() {
 public String Obtener_DIRECCION() {
     return this.DIRECCION;
 }
-public char Obtener_SEXO() {
+public String Obtener_SEXO() {
     return this.SEXO;
 }
 public double Obtener_SALARIO() {
