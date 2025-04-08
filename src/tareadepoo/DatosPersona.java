@@ -153,12 +153,12 @@ public String validar(String textoVal, String tipo){
     return "";
 }
 public String datosCompletos(boolean esProfe){
-    return   DNI + 
-            APENOM + LIB.Replicate(' ',30 - APENOM.length()) + 
-            FECNAC + 
-            TELEFONO + 
-            DIRECCION + LIB.Replicate(' ',30 - DIRECCION.length()) + 
-            SEXO +(esProfe ? LIB.Replicate(' ',10 - PROFESION.length()) + PROFESION : "");
+    return   DNI + " " +
+            APENOM + " " +
+            FECNAC + " " +
+            TELEFONO + " " +
+            DIRECCION + " "+ 
+            SEXO +(esProfe ? " "+ PROFESION : "");
 }
 //----------------------------------
 } //class
