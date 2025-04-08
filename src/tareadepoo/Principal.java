@@ -11,6 +11,7 @@ package tareadepoo;
 public class Principal extends javax.swing.JFrame {
 
     Registro regis = new Registro();
+    Listado lista = new Listado();
     /**
      * Creates new form Principal
      */
@@ -47,6 +48,11 @@ public class Principal extends javax.swing.JFrame {
 
         jButton6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton6.setText("Listado de personal");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton7.setForeground(new java.awt.Color(255, 51, 51));
@@ -103,6 +109,12 @@ public class Principal extends javax.swing.JFrame {
         regis.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        lista.setPrincipal(this);
+        lista.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
