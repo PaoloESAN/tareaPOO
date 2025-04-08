@@ -5,6 +5,7 @@
 package tareadepoo;
 
 import ejercicioavanzado.TLib;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,6 +14,7 @@ import ejercicioavanzado.TLib;
 public class Registro extends javax.swing.JFrame {
     
     TLib    LIB = new TLib();
+    DatosPersona datosP = new DatosPersona();
     private Principal principal;
     
     public void setPrincipal(Principal principal){
@@ -54,8 +56,6 @@ public class Registro extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         combSex = new javax.swing.JComboBox<>();
-        jLabel10 = new javax.swing.JLabel();
-        txtSalar = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtProf = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -125,11 +125,6 @@ public class Registro extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel10.setText("Salario");
-
-        txtSalar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setText("Profesion:");
 
@@ -185,8 +180,7 @@ public class Registro extends javax.swing.JFrame {
                                 .addComponent(txtTelef, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtNacim, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtDirec, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(combSex, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtSalar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(combSex, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(324, 324, 324)))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -198,8 +192,7 @@ public class Registro extends javax.swing.JFrame {
                                 .addComponent(jLabel7)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)))
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -245,15 +238,11 @@ public class Registro extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(combSex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(txtSalar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -284,9 +273,46 @@ public class Registro extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String respuesta="";
-        respuesta = "";
+        respuesta += "\n"+datosP.validar(txtDni.getText(),"DNI");
+        respuesta +="\n"+ datosP.validar(txtNomApe.getText(),"apeNom");
+        respuesta += "\n"+datosP.validar(txtNacim.getText(),"fecha");
+        respuesta += "\n"+datosP.validar(txtTelef.getText(),"telefono");
+        respuesta += "\n"+datosP.validar(txtDirec.getText(),"direc");
+        if (radDocen.isSelected() && txtProf.getText().equals("")) {
+            respuesta += "\n" + "Error en la profesion";
+        }
+        if (respuesta.equals( "\n\n\n\n\n")) {
+            respuesta = "";
+        }
+        if (!(respuesta == "")) {
+            JOptionPane.showMessageDialog(rootPane, respuesta);
+        }else{
+            if (radDocen.isSelected()) {
+                datosP.Establecer_PROFESION(txtProf.getText());
+            }
+            datosP.Establecer_DNI(txtDni.getText());
+            datosP.Establecer_APENOM(txtNomApe.getText());
+            datosP.Establecer_FECNAC(txtNacim.getText());
+            datosP.Establecer_TELEFONO(txtTelef.getText());
+            datosP.Establecer_DIRECCION(txtDirec.getText());
+            datosP.Establecer_SEXO(combSex.getSelectedItem().toString());
+            String linea = datosP.datosCompletos(radDocen.isSelected());
+            LIB.WriteDataFile("PERSONAL.DAT", linea + LIB.Replicate(' ',129 - linea.length()));
+            JOptionPane.showMessageDialog(rootPane, "Se registro correctamente");
+            limpiar();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void limpiar(){
+        txtProf.setText("");
+        txtNacim.setText("");
+        txtTelef.setText("");
+        txtDirec.setText("");
+        txtDni.setText("");
+        txtNomApe.setText("");
+        combSex.setSelectedIndex(0);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -330,7 +356,6 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -346,7 +371,6 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JTextField txtNacim;
     private javax.swing.JTextField txtNomApe;
     private javax.swing.JTextField txtProf;
-    private javax.swing.JTextField txtSalar;
     private javax.swing.JTextField txtTelef;
     // End of variables declaration//GEN-END:variables
 }

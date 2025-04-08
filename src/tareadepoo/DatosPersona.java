@@ -13,6 +13,7 @@ private String TELEFONO;
 private String DIRECCION;
 private char SEXO;
 private double SALARIO;
+private String PROFESION;
 //----------------------------------
 //METODO CONSTRUCTOR
 //----------------------------------
@@ -42,6 +43,9 @@ public void Establecer_SEXO(String CAD) {  //char sexo
 public void Establecer_SALARIO(String CAD) {  //double salario
     this.SALARIO = Double.parseDouble(CAD);
 }
+public void Establecer_PROFESION(String profesion) {  //double salario
+    this.PROFESION = profesion;
+}
 //----------------------------------
 //METODOS GET
 //----------------------------------
@@ -65,6 +69,9 @@ public char Obtener_SEXO() {
 }
 public double Obtener_SALARIO() {
     return this.SALARIO;
+}
+public String Obtener_PROFESION() {
+    return this.PROFESION;
 }
 //----------------------------------
 //----------------------------------
@@ -131,8 +138,27 @@ String CAD="";
 
 }
 public String validar(String textoVal, String tipo){
-    LIB.ValidacionOK(textoVal,"DNI",8,8,"0123456789");
-    return null;
+    if (tipo=="DNI" && !LIB.ValidacionOK(textoVal,"DNI",8,8,"0123456789")){
+        return "Error en el DNI";
+    }else if(tipo == "apeNom" && !LIB.ValidacionOK(textoVal,"Apellidos/Nombres",3,30,"ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz" + (char)164 + (char)165)){
+        return "Error en Nombres y Apellidos";
+    }else if(tipo =="fecha"&& !LIB.FechaOK(textoVal,1960,2006)){
+        return "Error en la fecha de nacimiento";
+    }else if(tipo=="telefono" && !LIB.ValidacionOK(textoVal,"Telefono",9,9,"0123456789")){
+        return "Error en el telefono";
+    }else if(tipo=="direc" && !LIB.ValidacionOK(textoVal,"Direccion",5,30,"ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz.0123456789")){
+        return "Error en el telefono";
+    }
+    
+    return "";
+}
+public String datosCompletos(boolean esProfe){
+    return   DNI + 
+            APENOM + LIB.Replicate(' ',30 - APENOM.length()) + 
+            FECNAC + 
+            TELEFONO + 
+            DIRECCION + LIB.Replicate(' ',30 - DIRECCION.length()) + 
+            SEXO +(esProfe ? LIB.Replicate(' ',10 - PROFESION.length()) + PROFESION : "");
 }
 //----------------------------------
 } //class
