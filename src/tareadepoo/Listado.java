@@ -30,6 +30,7 @@ public class Listado extends javax.swing.JFrame {
      */
     public Listado() {
         initComponents();
+        this.setLocationRelativeTo(null);
         modeloAlum = (DefaultTableModel) tablaAlum.getModel();
         modeloDoc = (DefaultTableModel) tablaDoc.getModel();
         jScrollPane2.setVisible(false);

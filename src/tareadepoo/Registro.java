@@ -32,6 +32,7 @@ public class Registro extends javax.swing.JFrame {
      */
     public Registro() {
         initComponents();
+        this.setLocationRelativeTo(null);
         jLabel5.setVisible(false);
             txtProf.setVisible(false);
     }
@@ -223,10 +224,7 @@ public class Registro extends javax.swing.JFrame {
         if (radDocen.isSelected() && txtProf.getText().equals("")) {
             respuesta += "\n" + "Error en la profesion";
         }
-        if (respuesta.equals( "\n\n\n\n\n")) {
-            respuesta = "";
-        }
-        if (!(respuesta == "")) {
+        if (!(respuesta.equals("\n\n\n\n\n"))) {
             JOptionPane.showMessageDialog(rootPane, respuesta);
         }else{
             datosP.Establecer_DNI(txtDni.getText());
