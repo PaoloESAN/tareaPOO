@@ -143,16 +143,16 @@ public class Listado extends javax.swing.JFrame {
             jScrollPane2.setVisible(true);
         }
     }//GEN-LAST:event_radDocenActionPerformed
-    public void rellenarAmbas(){
+    public void rellenarAmbas(File archivo){
         modeloAlum.setRowCount(0);
         modeloDoc.setRowCount(0);
-        rellenarTabla("datos.json","alumnos");
-        rellenarTabla("datos.json","docentes");
+        rellenarTabla(archivo,"alumnos");
+        rellenarTabla(archivo,"docentes");
     }
     
-    private void rellenarTabla(String ruta, String tipo){
+    private void rellenarTabla(File ruta, String tipo){
             
-        File archivo = new File(ruta);
+        File archivo = ruta;
 
         if (!archivo.exists()) {
             return;
@@ -161,7 +161,7 @@ public class Listado extends javax.swing.JFrame {
         JSONArray arreglo;
         
         try {
-            String jsonStr = new String(java.nio.file.Files.readAllBytes(java.nio.file.Paths.get(ruta)));
+            String jsonStr = new String(java.nio.file.Files.readAllBytes(archivo.toPath()));
             JSONObject personas = new JSONObject(jsonStr);
             if (tipo.equals("alumnos")) {
                 arreglo = personas.getJSONArray("alumnos");
