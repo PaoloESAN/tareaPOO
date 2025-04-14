@@ -5,13 +5,8 @@
 package tareadepoo;
 
 import ejercicioavanzado.TLib;
-import java.io.File;
-import java.io.FileWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import javax.swing.JOptionPane;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -253,6 +248,10 @@ public class Registro extends javax.swing.JFrame {
         txtDni.setText("");
         txtNomApe.setText("");
         combSex.setSelectedIndex(0);
+    }
+    
+    public void actualizarComponente(){
+        SwingUtilities.updateComponentTreeUI(this);
     }
     
     /**

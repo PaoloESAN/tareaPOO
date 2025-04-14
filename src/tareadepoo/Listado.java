@@ -6,6 +6,7 @@ package tareadepoo;
 
 import java.io.File;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -188,6 +189,9 @@ public class Listado extends javax.swing.JFrame {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error al leer el JSON");
         }
+    }
+    public void actualizarComponente(){
+        SwingUtilities.updateComponentTreeUI(this);
     }
     /**
      * @param args the command line arguments
