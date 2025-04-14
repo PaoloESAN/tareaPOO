@@ -1,7 +1,7 @@
 
 # Tarea de POO
 
-Registrar alumnos/docentes usando java swing para ser guardados en un archivos .json, luego leer los .json para poder visualizarlos en una tabla de swing.
+Registrar alumnos/docentes usando java swing para ser guardados en un archivos .json, luego leer el archivo .json para poder visualizarlos en una tabla de swing.
 
 ## Librerías
 - [Flatlaf](https://github.com/JFormDesigner/FlatLaf)
@@ -9,7 +9,7 @@ Registrar alumnos/docentes usando java swing para ser guardados en un archivos .
 
 ## Descargas
 
-[![Static Badge](https://img.shields.io/badge/java_.jar-1.0.1-green)](https://github.com/PaoloESAN/tareaPOO/releases/download/v1.0.1/TareaDePOO.jar)
+[![Static Badge](https://img.shields.io/badge/java_.jar-1.1.0-green)](https://github.com/PaoloESAN/tareaPOO/releases/download/v1.1.0/TareaDePOO.jar)
 
 ## Screenshots
 
