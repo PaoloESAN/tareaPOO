@@ -235,56 +235,15 @@ public class Registro extends javax.swing.JFrame {
             datosP.Establecer_SEXO((String) combSex.getSelectedItem());
             if (radDocen.isSelected()) {
                 datosP.Establecer_PROFESION(txtProf.getText());
-                guardarJson("docentes.json",datosP);
+                ArchivoJson.guardarJson("datos.json",datosP,"docentes");
             }else{
-                 guardarJson("alumnos.json",datosP);
+                 ArchivoJson.guardarJson("datos.json",datosP,"alumnos");
             }
             JOptionPane.showMessageDialog(rootPane, "Se registro correctamente");
             limpiar();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    
-        public static void guardarJson(String filename, DatosPersona persona) {
-        JSONArray personasArray;
-
-        try {
-            File archivo = new File(filename);
-            
-            if (archivo.exists() && archivo.length() > 0) {
-                
-                String contenido = new String(Files.readAllBytes(Paths.get(filename)));
-                
-                personasArray = new JSONArray(contenido);
-                
-            } else {
-                
-                personasArray = new JSONArray();
-                
-            }
-
-            JSONObject obj = new JSONObject();
-            obj.put("dni", persona.Obtener_DNI());
-            obj.put("apellidosNombres", persona.Obtener_APENOM());
-            obj.put("fechaNacimiento", persona.Obtener_FECNAC());
-            obj.put("telefono", persona.Obtener_TELEFONO());
-            obj.put("direccion", persona.Obtener_DIRECCION());
-            obj.put("sexo", persona.Obtener_SEXO());
-            if (filename.equals("docentes.json")) {
-                obj.put("profesion", persona.Obtener_PROFESION());
-            }
-
-            personasArray.put(obj);
-
-            try (FileWriter file = new FileWriter(filename)) {
-                file.write(personasArray.toString(4));
-                file.flush();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
     
     private void limpiar(){
         txtProf.setText("");

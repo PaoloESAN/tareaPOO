@@ -1,0 +1,29 @@
+{
+    "alumnos": [
+        {
+            "fechaNacimiento": "12/11/1998",
+            "direccion": "las calles",
+            "telefono": "124235412",
+            "sexo": "Hombre",
+            "dni": "41254123",
+            "apellidosNombres": "ape ape nom nom"
+        },
+        {
+            "fechaNacimiento": "11/11/1991",
+            "direccion": "las calles",
+            "telefono": "123321412",
+            "sexo": "Mujer",
+            "dni": "42521236",
+            "apellidosNombres": "ape ape nom nom"
+        }
+    ],
+    "docentes": [{
+        "fechaNacimiento": "11/10/1997",
+        "direccion": "los alamos",
+        "telefono": "123321142",
+        "sexo": "Hombre",
+        "profesion": "doctor",
+        "dni": "74859612",
+        "apellidosNombres": "ape ape nom nom"
+    }]
+}
