@@ -6,12 +6,15 @@ package tareadepoo;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -38,30 +41,33 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        fileSelect = new javax.swing.JFileChooser();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnRegis = new javax.swing.JButton();
+        btnListado = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnModo = new javax.swing.JButton();
+        btnJson = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("REGISTRO DE UNIVERSIDAD");
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton1.setText("Registrar Alumno/Docente");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnRegis.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnRegis.setText("Registrar Alumno/Docente");
+        btnRegis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnRegisActionPerformed(evt);
             }
         });
 
-        jButton6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton6.setText("Listado de personal");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnListado.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnListado.setText("Listado de personal");
+        btnListado.setEnabled(false);
+        btnListado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnListadoActionPerformed(evt);
             }
         });
 
@@ -74,11 +80,18 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/sol.png"))); // NOI18N
-        jButton2.setBorderPainted(false);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnModo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/sol.png"))); // NOI18N
+        btnModo.setBorderPainted(false);
+        btnModo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnModoActionPerformed(evt);
+            }
+        });
+
+        btnJson.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/json.png"))); // NOI18N
+        btnJson.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnJsonActionPerformed(evt);
             }
         });
 
@@ -95,15 +108,17 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(202, 202, 202)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnListado, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnRegis, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnJson))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jButton2)
-                                .addGap(113, 113, 113)
+                                .addComponent(btnModo)
+                                .addGap(115, 115, 115)
                                 .addComponent(jLabel1)))
-                        .addGap(0, 197, Short.MAX_VALUE)))
+                        .addGap(0, 142, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -112,15 +127,17 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton2))
+                        .addComponent(btnModo))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
+                        .addGap(54, 54, 54)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(44, 44, 44)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
+                .addComponent(btnRegis, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnListado, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnJson))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -132,29 +149,29 @@ public class Principal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnRegisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisActionPerformed
         regis.setPrincipal(this);
         regis.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnRegisActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btnListadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListadoActionPerformed
         lista.setPrincipal(this);
         lista.setVisible(true);
-        lista.rellenarAmbas();
+        lista.rellenarAmbas(archivoSeleccionado);
         this.setVisible(false);
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btnListadoActionPerformed
    //---------------------------------------------
     //MODO OSCURO Y MODO CLARO
     //--------------------------------------------
     boolean dark = true;
     
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnModoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModoActionPerformed
         if (dark){
             try {
                 UIManager.setLookAndFeel( new FlatIntelliJLaf() );
                 SwingUtilities.updateComponentTreeUI(this);
-                jButton2.setIcon(new ImageIcon(getClass().getResource("/iconos/luna.png")));
+                btnModo.setIcon(new ImageIcon(getClass().getResource("/iconos/luna.png")));
                 regis.actualizarComponente();
                 lista.actualizarComponente();
                 dark = false;
@@ -165,7 +182,7 @@ public class Principal extends javax.swing.JFrame {
             try {
                 UIManager.setLookAndFeel( new FlatDarculaLaf() );
                 SwingUtilities.updateComponentTreeUI(this);
-                jButton2.setIcon(new ImageIcon(getClass().getResource("/iconos/sol.png")));
+                btnModo.setIcon(new ImageIcon(getClass().getResource("/iconos/sol.png")));
                 regis.actualizarComponente();
                 lista.actualizarComponente();
                 dark = true;
@@ -173,7 +190,30 @@ public class Principal extends javax.swing.JFrame {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnModoActionPerformed
+    
+    //-----------------------------------
+    //ELEGIR UN ARCHIVO JSON
+    //-----------------------------------
+    
+    File archivoSeleccionado;
+            
+    private void btnJsonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJsonActionPerformed
+            fileSelect.setCurrentDirectory(new File(System.getProperty("user.dir")));
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos JSON (*.json)", "json");
+            fileSelect.setFileFilter(filter);
+            fileSelect.setMultiSelectionEnabled(false);
+
+            int result = fileSelect.showOpenDialog(this);
+
+            if (result == fileSelect.APPROVE_OPTION) {
+                archivoSeleccionado = fileSelect.getSelectedFile();
+                JOptionPane.showMessageDialog(this, "Archivo cargado");
+                btnListado.setEnabled(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo cargar el archivo");
+            }
+    }//GEN-LAST:event_btnJsonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,9 +251,11 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton btnJson;
+    private javax.swing.JButton btnListado;
+    private javax.swing.JButton btnModo;
+    private javax.swing.JButton btnRegis;
+    private javax.swing.JFileChooser fileSelect;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
