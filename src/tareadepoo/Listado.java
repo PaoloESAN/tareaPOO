@@ -145,11 +145,11 @@ public class Listado extends javax.swing.JFrame {
     public void rellenarAmbas(){
         modeloAlum.setRowCount(0);
         modeloDoc.setRowCount(0);
-        rellenarTabla("alumnos.json");
-        rellenarTabla("docentes.json");
+        rellenarTabla("datos.json","alumnos");
+        rellenarTabla("datos.json","docentes");
     }
     
-    private void rellenarTabla(String ruta){
+    private void rellenarTabla(String ruta, String tipo){
             
         File archivo = new File(ruta);
 
@@ -157,10 +157,16 @@ public class Listado extends javax.swing.JFrame {
             return;
         }
         
+        JSONArray arreglo;
+        
         try {
             String jsonStr = new String(java.nio.file.Files.readAllBytes(java.nio.file.Paths.get(ruta)));
-
-            JSONArray arreglo = new JSONArray(jsonStr);
+            JSONObject personas = new JSONObject(jsonStr);
+            if (tipo.equals("alumnos")) {
+                arreglo = personas.getJSONArray("alumnos");
+            }else{
+                arreglo = personas.getJSONArray("docentes");
+            }
 
             for (int i = 0; i < arreglo.length(); i++) {
                 JSONObject persona = arreglo.getJSONObject(i);
@@ -170,7 +176,7 @@ public class Listado extends javax.swing.JFrame {
                 String telefono = persona.getString("telefono");
                 String direccion = persona.getString("direccion");
                 String sexo = persona.getString("sexo");
-                if(ruta.equals("docentes.json")){
+                if(tipo.equals("docentes")){
                     String profesion = persona.getString("profesion");
                     modeloDoc.addRow(new Object[]{nombre, apellidosNombres, ciudad,telefono,direccion,sexo,profesion});
                 }else{
