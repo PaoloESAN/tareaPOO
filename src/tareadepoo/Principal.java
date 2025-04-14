@@ -170,10 +170,7 @@ public class Principal extends javax.swing.JFrame {
         if (dark){
             try {
                 UIManager.setLookAndFeel( new FlatIntelliJLaf() );
-                SwingUtilities.updateComponentTreeUI(this);
                 btnModo.setIcon(new ImageIcon(getClass().getResource("/iconos/luna.png")));
-                regis.actualizarComponente();
-                lista.actualizarComponente();
                 dark = false;
             } catch (UnsupportedLookAndFeelException ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
@@ -181,15 +178,16 @@ public class Principal extends javax.swing.JFrame {
         }else{
             try {
                 UIManager.setLookAndFeel( new FlatDarculaLaf() );
-                SwingUtilities.updateComponentTreeUI(this);
                 btnModo.setIcon(new ImageIcon(getClass().getResource("/iconos/sol.png")));
-                regis.actualizarComponente();
-                lista.actualizarComponente();
                 dark = true;
             } catch (UnsupportedLookAndFeelException ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        SwingUtilities.updateComponentTreeUI(this);
+        SwingUtilities.updateComponentTreeUI(fileSelect);
+        regis.actualizarComponente();
+        lista.actualizarComponente();
     }//GEN-LAST:event_btnModoActionPerformed
     
     //-----------------------------------

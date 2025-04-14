@@ -3,22 +3,21 @@ package tareadepoo;
 import java.io.File;
 import java.io.FileWriter;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class ArchivoJson {
-     public static void guardarJson(String filename, DatosPersona persona, String tipo) {
+     public static void guardarJson(File filename, DatosPersona persona, String tipo) {
          JSONArray alumnos;
          JSONArray docentes;
          JSONObject personas;
 
         try {
-            File archivo = new File(filename);
+            File archivo = filename;
             
             if (archivo.exists() && archivo.length() > 0) {
                 
-                String contenido = new String(Files.readAllBytes(Paths.get(filename)));
+                String contenido = new String(Files.readAllBytes(archivo.toPath()));
                 
                 personas = new JSONObject(contenido);
                 alumnos = personas.getJSONArray("alumnos");

@@ -4,9 +4,10 @@
  */
 package tareadepoo;
 
-import ejercicioavanzado.TLib;
+import java.io.File;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -14,7 +15,6 @@ import javax.swing.SwingUtilities;
  */
 public class Registro extends javax.swing.JFrame {
     
-    TLib    LIB = new TLib();
     DatosPersona datosP = new DatosPersona();
     private Principal principal;
     
@@ -42,6 +42,7 @@ public class Registro extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        fileSave = new javax.swing.JFileChooser();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         radAlum = new javax.swing.JRadioButton();
@@ -220,8 +221,29 @@ public class Registro extends javax.swing.JFrame {
             respuesta += "\n" + "Error en la profesion";
         }
         if (!(respuesta.equals("\n\n\n\n\n"))) {
-            JOptionPane.showMessageDialog(rootPane, respuesta);
+            JOptionPane.showMessageDialog(this, respuesta);
         }else{
+            File archivo;
+            
+            fileSave.setDialogTitle("Guardar archivo JSON");
+
+            fileSave.setCurrentDirectory(new File(System.getProperty("user.dir")));
+
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos JSON (*.json)", "json");
+            fileSave.setFileFilter(filter);
+
+            int result = fileSave.showSaveDialog(this);
+
+            if (result == fileSave.APPROVE_OPTION) {
+                archivo = fileSave.getSelectedFile();
+                if (!archivo.getName().toLowerCase().endsWith(".json")) {
+                    archivo = new File(archivo.getParentFile(), archivo.getName() + ".json");
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "Error al guardar el archivo");
+                return;
+            }
+            
             datosP.Establecer_DNI(txtDni.getText());
             datosP.Establecer_APENOM(txtNomApe.getText());
             datosP.Establecer_FECNAC(txtNacim.getText());
@@ -230,9 +252,9 @@ public class Registro extends javax.swing.JFrame {
             datosP.Establecer_SEXO((String) combSex.getSelectedItem());
             if (radDocen.isSelected()) {
                 datosP.Establecer_PROFESION(txtProf.getText());
-                ArchivoJson.guardarJson("datos.json",datosP,"docentes");
+                ArchivoJson.guardarJson(archivo,datosP,"docentes");
             }else{
-                 ArchivoJson.guardarJson("datos.json",datosP,"alumnos");
+                 ArchivoJson.guardarJson(archivo,datosP,"alumnos");
             }
             JOptionPane.showMessageDialog(rootPane, "Se registro correctamente");
             limpiar();
@@ -252,6 +274,7 @@ public class Registro extends javax.swing.JFrame {
     
     public void actualizarComponente(){
         SwingUtilities.updateComponentTreeUI(this);
+        SwingUtilities.updateComponentTreeUI(fileSave);
     }
     
     /**
@@ -294,6 +317,7 @@ public class Registro extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> combSex;
+    private javax.swing.JFileChooser fileSave;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
