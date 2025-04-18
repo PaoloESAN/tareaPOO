@@ -5,11 +5,11 @@
 package tareadepoo;
 
 import java.io.File;
-import javax.swing.JOptionPane;
+import java.util.List;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import personal.Alumno;
+import personal.Docente;
 
 /**
  *
@@ -151,45 +151,19 @@ public class Listado extends javax.swing.JFrame {
     }
     
     private void rellenarTabla(File ruta, String tipo){
-            
-        File archivo = ruta;
-
-        if (!archivo.exists()) {
-            return;
-        }
-        
-        JSONArray arreglo;
-        
-        try {
-            String jsonStr = new String(java.nio.file.Files.readAllBytes(archivo.toPath()));
-            JSONObject personas = new JSONObject(jsonStr);
-            if (tipo.equals("alumnos")) {
-                arreglo = personas.getJSONArray("alumnos");
-            }else{
-                arreglo = personas.getJSONArray("docentes");
+        if(tipo.equals("docentes")){
+            List<Docente> docentes = ArchivoJson.leerDocentes(ruta);
+            for(Docente doc : docentes){
+                modeloDoc.addRow(new Object[]{doc.getDni(), doc.getApeNom(), doc.getFechaNac(), doc.getTelef(), doc.getDireccion(), doc.getSexo(), doc.getProfesion()});
             }
-
-            for (int i = 0; i < arreglo.length(); i++) {
-                JSONObject persona = arreglo.getJSONObject(i);
-                String nombre = persona.getString("dni");
-                String apellidosNombres = persona.getString("apellidosNombres");
-                String ciudad = persona.getString("fechaNacimiento");
-                String telefono = persona.getString("telefono");
-                String direccion = persona.getString("direccion");
-                String sexo = persona.getString("sexo");
-                if(tipo.equals("docentes")){
-                    String profesion = persona.getString("profesion");
-                    modeloDoc.addRow(new Object[]{nombre, apellidosNombres, ciudad,telefono,direccion,sexo,profesion});
-                }else{
-                    modeloAlum.addRow(new Object[]{nombre, apellidosNombres, ciudad,telefono,direccion,sexo});
-                }
+        }else{
+            List<Alumno> alumnos = ArchivoJson.leerAlumnos(ruta);
+            for(Alumno alu : alumnos){
+                modeloAlum.addRow(new Object[]{alu.getDni(), alu.getApeNom(), alu.getFechaNac(),alu.getTelef(),alu.getDireccion(),alu.getSexo()});
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error al leer el JSON");
         }
     }
+    
     public void actualizarComponente(){
         SwingUtilities.updateComponentTreeUI(this);
     }
