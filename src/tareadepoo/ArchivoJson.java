@@ -3,13 +3,90 @@ package tareadepoo;
 import java.io.File;
 import java.io.FileWriter;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import personal.Alumno;
+import personal.Docente;
 
 public class ArchivoJson {
-     public static void guardarJson(File filename, DatosPersona persona, String tipo) {
+    public static List<Alumno> leerAlumnos(File ruta){
+        List<Alumno> resultado = new ArrayList<>();
+                    
+        File archivo = ruta;
+
+        if (!archivo.exists()) {
+            return new ArrayList<>();
+        }
+        
+        JSONArray arreglo;
+        
+        try {
+            String jsonStr = new String(java.nio.file.Files.readAllBytes(archivo.toPath()));
+            JSONObject personas = new JSONObject(jsonStr);
+            arreglo = personas.getJSONArray("alumnos");
+
+
+            for (int i = 0; i < arreglo.length(); i++) {
+                JSONObject persona = arreglo.getJSONObject(i);
+                String dni = persona.getString("dni");
+                String apellidosNombres = persona.getString("apellidosNombres");
+                String fechaNac = persona.getString("fechaNacimiento");
+                String telefono = persona.getString("telefono");
+                String direccion = persona.getString("direccion");
+                String sexo = persona.getString("sexo");
+                Alumno a = new Alumno(dni, apellidosNombres, fechaNac, telefono, direccion, sexo);
+                resultado.add(a);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally{
+            return resultado;
+        }
+    }
+    
+    
+    public static List<Docente> leerDocentes(File ruta){
+        List<Docente> resultado = new ArrayList<>();
+                    
+        File archivo = ruta;
+
+        if (!archivo.exists()) {
+            return new ArrayList<>();
+        }
+        
+        JSONArray arreglo;
+        
+        try {
+            String jsonStr = new String(java.nio.file.Files.readAllBytes(archivo.toPath()));
+            JSONObject personas = new JSONObject(jsonStr);
+            arreglo = personas.getJSONArray("docentes");
+
+
+            for (int i = 0; i < arreglo.length(); i++) {
+                JSONObject persona = arreglo.getJSONObject(i);
+                String dni = persona.getString("dni");
+                String apellidosNombres = persona.getString("apellidosNombres");
+                String fechaNac = persona.getString("fechaNacimiento");
+                String telefono = persona.getString("telefono");
+                String direccion = persona.getString("direccion");
+                String sexo = persona.getString("sexo");
+                String profesion = persona.getString("profesion");
+                Docente a = new Docente(dni, apellidosNombres, fechaNac, telefono, direccion, sexo,profesion);
+                resultado.add(a);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally{
+            return resultado;
+        }
+    }
+     
+     public static void guardarJsonAlumnos(File filename, Alumno alumno) {
          JSONArray alumnos;
-         JSONArray docentes;
          JSONObject personas;
 
         try {
@@ -21,30 +98,65 @@ public class ArchivoJson {
                 
                 personas = new JSONObject(contenido);
                 alumnos = personas.getJSONArray("alumnos");
-                docentes = personas.getJSONArray("docentes");
             } else {
                 
                 personas = new JSONObject();
-                docentes = new JSONArray();
                 alumnos = new JSONArray();
                 
             }
 
             JSONObject obj = new JSONObject();
-            obj.put("dni", persona.Obtener_DNI());
-            obj.put("apellidosNombres", persona.Obtener_APENOM());
-            obj.put("fechaNacimiento", persona.Obtener_FECNAC());
-            obj.put("telefono", persona.Obtener_TELEFONO());
-            obj.put("direccion", persona.Obtener_DIRECCION());
-            obj.put("sexo", persona.Obtener_SEXO());
-            if (tipo.equals("docentes")) {
-                obj.put("profesion", persona.Obtener_PROFESION());
-                docentes.put(obj);
-            }else{
-                alumnos.put(obj);
-            }
+            obj.put("dni", alumno.getDni());
+            obj.put("apellidosNombres", alumno.getApeNom());
+            obj.put("fechaNacimiento", alumno.getFechaNac());
+            obj.put("telefono", alumno.getTelef());
+            obj.put("direccion", alumno.getDireccion());
+            obj.put("sexo", alumno.getSexo());
+            alumnos.put(obj);
             if (!(archivo.exists() && archivo.length() > 0)){
                 personas.put("alumnos",alumnos);
+            }
+            try (FileWriter file = new FileWriter(filename)) {
+                file.write(personas.toString(4));
+                file.flush();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+     
+     public static void guardarJsonDocentes(File filename, Docente docente) {
+         JSONArray docentes;
+         JSONObject personas;
+
+        try {
+            File archivo = filename;
+            
+            if (archivo.exists() && archivo.length() > 0) {
+                
+                String contenido = new String(Files.readAllBytes(archivo.toPath()));
+                
+                personas = new JSONObject(contenido);
+                docentes = personas.getJSONArray("docentes");
+            } else {
+                
+                personas = new JSONObject();
+                docentes = new JSONArray();
+                
+            }
+
+            JSONObject obj = new JSONObject();
+            obj.put("dni", docente.getDni());
+            obj.put("apellidosNombres", docente.getApeNom());
+            obj.put("fechaNacimiento", docente.getFechaNac());
+            obj.put("telefono", docente.getTelef());
+            obj.put("direccion", docente.getDireccion());
+            obj.put("sexo", docente.getSexo());
+            obj.put("profesion", docente.getProfesion());
+            docentes.put(obj);
+            
+            if (!(archivo.exists() && archivo.length() > 0)){
                 personas.put("docentes",docentes);
             }
             try (FileWriter file = new FileWriter(filename)) {

@@ -8,14 +8,14 @@ import java.io.File;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import personal.Alumno;
+import personal.Docente;
 
 /**
  *
  * @author USUARIO
  */
 public class Registro extends javax.swing.JFrame {
-    
-    DatosPersona datosP = new DatosPersona();
     private Principal principal;
     
     public void setPrincipal(Principal principal){
@@ -211,56 +211,71 @@ public class Registro extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String respuesta="";
-        respuesta += "\n"+datosP.validar(txtDni.getText(),"DNI");
-        respuesta +="\n"+ datosP.validar(txtNomApe.getText(),"apeNom");
-        respuesta += "\n"+datosP.validar(txtNacim.getText(),"fecha");
-        respuesta += "\n"+datosP.validar(txtTelef.getText(),"telefono");
-        respuesta += "\n"+datosP.validar(txtDirec.getText(),"direc");
-        if (radDocen.isSelected() && txtProf.getText().equals("")) {
-            respuesta += "\n" + "Error en la profesion";
-        }
-        if (!(respuesta.equals("\n\n\n\n\n"))) {
+        
+        String respuesta=erroresRespuesta();
+        
+        if (!(respuesta.equals(""))) {
             JOptionPane.showMessageDialog(this, respuesta);
         }else{
-            File archivo;
             
-            fileSave.setDialogTitle("Guardar archivo JSON");
-
-            fileSave.setCurrentDirectory(new File(System.getProperty("user.dir")));
-
-            FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos JSON (*.json)", "json");
-            fileSave.setFileFilter(filter);
-
-            int result = fileSave.showSaveDialog(this);
-
-            if (result == fileSave.APPROVE_OPTION) {
-                archivo = fileSave.getSelectedFile();
-                if (!archivo.getName().toLowerCase().endsWith(".json")) {
-                    archivo = new File(archivo.getParentFile(), archivo.getName() + ".json");
-                }
-            }else{
+            File archivo = selecGuardar();
+            
+            if (archivo == null){
                 JOptionPane.showMessageDialog(this, "Error al guardar el archivo");
                 return;
             }
             
-            datosP.Establecer_DNI(txtDni.getText());
-            datosP.Establecer_APENOM(txtNomApe.getText());
-            datosP.Establecer_FECNAC(txtNacim.getText());
-            datosP.Establecer_TELEFONO(txtTelef.getText());
-            datosP.Establecer_DIRECCION(txtDirec.getText());
-            datosP.Establecer_SEXO((String) combSex.getSelectedItem());
             if (radDocen.isSelected()) {
-                datosP.Establecer_PROFESION(txtProf.getText());
-                ArchivoJson.guardarJson(archivo,datosP,"docentes");
+                Docente docente = new Docente(txtDni.getText(), txtNomApe.getText(), txtNacim.getText(), txtTelef.getText(), txtDirec.getText(), (String)combSex.getSelectedItem(), txtProf.getText());
+                ArchivoJson.guardarJsonDocentes(archivo,docente);
+                
             }else{
-                 ArchivoJson.guardarJson(archivo,datosP,"alumnos");
+                
+                Alumno alumno = new Alumno(txtDni.getText(), txtNomApe.getText(), txtNacim.getText(), txtTelef.getText(), txtDirec.getText(), (String)combSex.getSelectedItem());
+                ArchivoJson.guardarJsonAlumnos(archivo,alumno);
+                
             }
+            
             JOptionPane.showMessageDialog(rootPane, "Se registro correctamente");
             limpiar();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private String erroresRespuesta(){
+        Validar valid = new Validar();
+        String respuesta = "";
+        respuesta += valid.validarDni(txtDni.getText());
+        respuesta += valid.validarApeNom(txtNomApe.getText());
+        respuesta += valid.validarFecha(txtNacim.getText());
+        respuesta += valid.validarTelefono(txtTelef.getText());
+        respuesta += valid.validarDireccion(txtDirec.getText());
+        if (radDocen.isSelected() && txtProf.getText().equals("")) {
+            respuesta += "Error en la profesion";
+        }
+        return respuesta;
+    }
+    
+    private File selecGuardar(){
+        File archivo;
+         fileSave.setDialogTitle("Guardar archivo JSON");
+
+        fileSave.setCurrentDirectory(new File(System.getProperty("user.dir")));
+
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos JSON (*.json)", "json");
+        fileSave.setFileFilter(filter);
+
+        int result = fileSave.showSaveDialog(this);
+
+        if (result == fileSave.APPROVE_OPTION) {
+            archivo = fileSave.getSelectedFile();
+            if (!archivo.getName().toLowerCase().endsWith(".json")) {
+                archivo = new File(archivo.getParentFile(), archivo.getName() + ".json");
+            }
+        }else{
+            return null;
+        }
+        return archivo;
+    }
     
     private void limpiar(){
         txtProf.setText("");

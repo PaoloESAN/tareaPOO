@@ -2,7 +2,6 @@
 package tareadepoo;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
-import ejercicioavanzado.GESTION_PERSONAL;
 import javax.swing.UIManager;
 
 
@@ -18,9 +17,6 @@ public class TareaDePOO {
         ventana();
     }
     
-    public static void gestion(){
-        GESTION_PERSONAL hola= new GESTION_PERSONAL();
-    }
      public static void ventana(){
         try {
             UIManager.setLookAndFeel( new FlatDarculaLaf() );
