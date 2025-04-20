@@ -168,4 +168,105 @@ public class ArchivoJson {
             e.printStackTrace();
         }
     }
+    public static void actualizarAlumno(File filename, Alumno alumnoActu){
+        try {
+            String contenido = new String(Files.readAllBytes(filename.toPath()));
+            JSONObject personas = new JSONObject(contenido);
+            JSONArray alumnos = personas.getJSONArray("alumnos");
+
+            for (int i = 0; i < alumnos.length(); i++) {
+                JSONObject alumno = alumnos.getJSONObject(i);
+                if (alumno.getString("dni").equals(alumnoActu.getDni())) {
+                        alumno.put("apellidosNombres", alumnoActu.getApeNom());
+                        alumno.put("fechaNacimiento", alumnoActu.getFechaNac());
+                        alumno.put("telefono", alumnoActu.getTelef());
+                        alumno.put("direccion", alumnoActu.getDireccion());
+                        alumno.put("sexo", alumnoActu.getSexo());
+                    break;
+                }
+            }
+
+            FileWriter writer = new FileWriter(filename);
+            writer.write(personas.toString(4));
+            writer.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+     public static void actualizarDocente(File filename, Docente docenteActu){
+        try {
+            String contenido = new String(Files.readAllBytes(filename.toPath()));
+            JSONObject personas = new JSONObject(contenido);
+            JSONArray docentes = personas.getJSONArray("docentes");
+
+            for (int i = 0; i < docentes.length(); i++) {
+                JSONObject docente = docentes.getJSONObject(i);
+                if (docente.getString("dni").equals(docenteActu.getDni())) {
+                        docente.put("apellidosNombres", docenteActu.getApeNom());
+                        docente.put("fechaNacimiento", docenteActu.getFechaNac());
+                        docente.put("telefono", docenteActu.getTelef());
+                        docente.put("direccion", docenteActu.getDireccion());
+                        docente.put("sexo", docenteActu.getSexo());
+                        docente.put("profesion", docenteActu.getProfesion());
+                    break;
+                }
+            }
+
+            FileWriter writer = new FileWriter(filename);
+            writer.write(personas.toString(4));
+            writer.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+     
+     public static void eliminarAlumno(File filename, String dni){
+            try {
+            String contenido = new String(Files.readAllBytes(filename.toPath()));
+            JSONObject personas = new JSONObject(contenido);
+            JSONArray alumnos = personas.getJSONArray("alumnos");
+
+            for (int i = 0; i < alumnos.length(); i++) {
+                JSONObject alumno = alumnos.getJSONObject(i);
+                if (alumno.getString("dni").equals(dni)) {
+                    alumnos.remove(i);
+                    break;
+                }
+            }
+
+            FileWriter writer = new FileWriter(filename);
+            writer.write(personas.toString(4));
+            writer.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+     }
+     
+     public static void eliminarDocente(File filename, String dni){
+            try {
+            String contenido = new String(Files.readAllBytes(filename.toPath()));
+            JSONObject personas = new JSONObject(contenido);
+            JSONArray docentes = personas.getJSONArray("docentes");
+
+            for (int i = 0; i < docentes.length(); i++) {
+                JSONObject docente = docentes.getJSONObject(i);
+                if (docente.getString("dni").equals(dni)) {
+                    docentes.remove(i);
+                    break;
+                }
+            }
+
+            FileWriter writer = new FileWriter(filename);
+            writer.write(personas.toString(4));
+            writer.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+     }
 }
+
