@@ -151,7 +151,7 @@ public class Registro extends javax.swing.JFrame {
         getContentPane().add(txtProf, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, 133, -1));
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton1.setText("Aceptar");
+        jButton1.setText("Registrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
