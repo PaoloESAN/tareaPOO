@@ -15,7 +15,7 @@ import personal.Docente;
  *
  * @author USUARIO
  */
-public class Modificar extends javax.swing.JFrame {
+public class Eliminar extends javax.swing.JFrame {
     
     private Principal principal;
     
@@ -35,15 +35,15 @@ public class Modificar extends javax.swing.JFrame {
     public void establecerAlum(){
         radDocen.setSelected(false);
         radAlum.setSelected(true);
+        jLabel5.setVisible(false);
         labelProf.setVisible(false);
-        txtProf.setVisible(false);
     }
     
-    public Modificar() {
+    public Eliminar() {
         initComponents();
         this.setLocationRelativeTo(null);
+        jLabel5.setVisible(false);
         labelProf.setVisible(false);
-        txtProf.setVisible(false);
     }
 
     /**
@@ -63,18 +63,18 @@ public class Modificar extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         combDni = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        txtNomApe = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtNacim = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        txtTelef = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        txtDirec = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        combSex = new javax.swing.JComboBox<>();
-        labelProf = new javax.swing.JLabel();
-        txtProf = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         btnMod = new javax.swing.JButton();
+        labelApeNom = new javax.swing.JLabel();
+        labelFechaNac = new javax.swing.JLabel();
+        labelTelef = new javax.swing.JLabel();
+        labelDirec = new javax.swing.JLabel();
+        labelSexo = new javax.swing.JLabel();
+        labelProf = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,7 +98,7 @@ public class Modificar extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setText("Modificar");
+        jLabel1.setText("Eliminar");
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton2.setText("Volver");
@@ -121,66 +121,47 @@ public class Modificar extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel4.setText("Apellidos y nombres:");
 
-        txtNomApe.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setText("Fecha de nacimiento:");
-
-        txtNacim.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setText("Telefono:");
 
-        txtTelef.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel8.setText("Dirección:");
-
-        txtDirec.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel9.setText("Sexo:");
 
-        combSex.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        combSex.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hombre", "Mujer", "Otro" }));
-        combSex.setToolTipText("");
-        combSex.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                combSexActionPerformed(evt);
-            }
-        });
-
-        labelProf.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        labelProf.setText("Profesion:");
-
-        txtProf.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel5.setText("Profesion:");
 
         btnMod.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnMod.setText("Modificar");
+        btnMod.setText("Eliminar");
         btnMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModActionPerformed(evt);
             }
         });
 
+        labelApeNom.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        labelFechaNac.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        labelTelef.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        labelDirec.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        labelSexo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        labelProf.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(351, 351, 351)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnMod)
-                        .addGap(215, 215, 215)
-                        .addComponent(jButton2)))
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 234, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -192,32 +173,43 @@ public class Modificar extends javax.swing.JFrame {
                 .addGap(244, 244, 244))
             .addGroup(layout.createSequentialGroup()
                 .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(38, 38, 38)
-                        .addComponent(combSex, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(23, 23, 23)
-                        .addComponent(txtDirec, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(27, 27, 27)
-                        .addComponent(txtTelef, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(24, 24, 24)
-                        .addComponent(txtNacim, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel9))
+                                .addGap(27, 27, 27))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(24, 24, 24)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(labelDirec, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                            .addComponent(labelFechaNac, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelTelef, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelSexo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
-                        .addGap(22, 22, 22)
-                        .addComponent(txtNomApe, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(labelProf)
-                .addGap(11, 11, 11)
-                .addComponent(txtProf, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(labelApeNom, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(labelProf, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnMod)
+                        .addGap(248, 248, 248)
+                        .addComponent(jButton2)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(320, 320, 320))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,34 +224,34 @@ public class Modificar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(combDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(txtNomApe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelProf)
-                    .addComponent(txtProf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelApeNom, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelProf, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(240, 240, 240)
+                        .addGap(237, 237, 237)
                         .addComponent(jButton2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(txtNacim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                            .addComponent(labelFechaNac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(txtTelef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(labelTelef, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(txtDirec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(labelDirec, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(combSex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(33, 33, 33)
                         .addComponent(btnMod)))
                 .addContainerGap())
         );
@@ -269,16 +261,16 @@ public class Modificar extends javax.swing.JFrame {
 
     private void radAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radAlumActionPerformed
         if (radAlum.isSelected()) {
+            jLabel5.setVisible(false);
             labelProf.setVisible(false);
-            txtProf.setVisible(false);
             rellenarDniAlumnos();
         }
     }//GEN-LAST:event_radAlumActionPerformed
 
     private void radDocenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radDocenActionPerformed
         if (radDocen.isSelected()) {
+            jLabel5.setVisible(true);
             labelProf.setVisible(true);
-            txtProf.setVisible(true);
             rellenarDniDocentes();
         }
     }//GEN-LAST:event_radDocenActionPerformed
@@ -287,10 +279,6 @@ public class Modificar extends javax.swing.JFrame {
         principal.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void combSexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combSexActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_combSexActionPerformed
 
     private void combDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combDniActionPerformed
         if (!cargado) {
@@ -307,20 +295,15 @@ public class Modificar extends javax.swing.JFrame {
     }//GEN-LAST:event_combDniActionPerformed
 
     private void btnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModActionPerformed
-
-        String respuesta=erroresRespuesta();
-
-        if (!(respuesta.equals(""))) {
-            JOptionPane.showMessageDialog(this, respuesta);
-        }else{
-            if (radDocen.isSelected()) {
-                Docente docente = new Docente((String)combDni.getSelectedItem(), txtNomApe.getText(), txtNacim.getText(), txtTelef.getText(), txtDirec.getText(), (String)combSex.getSelectedItem(), txtProf.getText());
-                ArchivoJson.actualizarDocente(archivo, docente);
+        int respuesta = JOptionPane.showConfirmDialog(this, "¿Estas seguro de eliminar este " + (radAlum.isSelected() ? "Alumno?" : "Docente?"),"Confirmar eliminación",JOptionPane.YES_OPTION);
+        if (respuesta == JOptionPane.YES_OPTION) {
+            if (radAlum.isSelected()) {
+                ArchivoJson.eliminarAlumno(archivo, (String) combDni.getSelectedItem());
+                JOptionPane.showMessageDialog(this, "Alumno eliminado correctamente");
             }else{
-                Alumno alumno = new Alumno((String)combDni.getSelectedItem(), txtNomApe.getText(), txtNacim.getText(), txtTelef.getText(), txtDirec.getText(), (String)combSex.getSelectedItem());
-                ArchivoJson.actualizarAlumno(archivo, alumno);
+                ArchivoJson.eliminarDocente(archivo, (String) combDni.getSelectedItem());
+                JOptionPane.showMessageDialog(this, "Docente eliminado correctamente");
             }
-            JOptionPane.showMessageDialog(this, "Se modifcó correctamente");
             if(radDocen.isSelected()){
                 rellenarDniDocentes();
             }else{
@@ -329,18 +312,7 @@ public class Modificar extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnModActionPerformed
     
-    private String erroresRespuesta(){
-        Validar valid = new Validar();
-        String respuesta = "";
-        respuesta += valid.validarApeNom(txtNomApe.getText());
-        respuesta += valid.validarFecha(txtNacim.getText());
-        respuesta += valid.validarTelefono(txtTelef.getText());
-        respuesta += valid.validarDireccion(txtDirec.getText());
-        if (radDocen.isSelected() && txtProf.getText().equals("")) {
-            respuesta += "Error en la profesion";
-        }
-        return respuesta;
-    }
+
     
     public void rellenarDniAlumnos(){
         cargado = false;
@@ -366,29 +338,29 @@ public class Modificar extends javax.swing.JFrame {
     }
     public void rellenarTodoAlumno(Alumno alum){
         limpiar();
-        txtNomApe.setText(alum.getApeNom());
-        txtNacim.setText(alum.getFechaNac());
-        txtTelef.setText(alum.getTelef());
-        txtDirec.setText(alum.getDireccion());
-        combSex.setSelectedIndex(alum.getSexo().equals("Hombre") ? 0 : alum.getSexo().equals("Mujer") ? 1 : 2 );
+        labelApeNom.setText(alum.getApeNom());
+        labelFechaNac.setText(alum.getFechaNac());
+        labelTelef.setText(alum.getTelef());
+        labelDirec.setText(alum.getDireccion());
+        labelSexo.setText(alum.getSexo());
     }
     public void rellenarTodoDocente(Docente doc){
         limpiar();
-        txtNomApe.setText(doc.getApeNom());
-        txtNacim.setText(doc.getFechaNac());
-        txtTelef.setText(doc.getTelef());
-        txtDirec.setText(doc.getDireccion());
-        txtProf.setText(doc.getProfesion());
-        combSex.setSelectedIndex(doc.getSexo().equals("Hombre") ? 0 : doc.getSexo().equals("Mujer") ? 1 : 2 );
+        labelApeNom.setText(doc.getApeNom());
+        labelFechaNac.setText(doc.getFechaNac());
+        labelTelef.setText(doc.getTelef());
+        labelDirec.setText(doc.getDireccion());
+        labelProf.setText(doc.getProfesion());
+        labelSexo.setText(doc.getSexo());
     }
     
     public void limpiar(){
-        txtNomApe.setText("");
-        txtNacim.setText("");
-        txtTelef.setText("");
-        txtDirec.setText("");
-        txtProf.setText("");
-        combSex.setSelectedIndex(0);
+        labelApeNom.setText("");
+        labelFechaNac.setText("");
+        labelTelef.setText("");
+        labelDirec.setText("");
+        labelProf.setText("");
+        labelSexo.setText("");
     }
     
     public void actualizarComponente(){
@@ -412,20 +384,21 @@ public class Modificar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Modificar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Eliminar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Modificar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Eliminar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Modificar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Eliminar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Modificar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Eliminar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Modificar().setVisible(true);
+                new Eliminar().setVisible(true);
             }
         });
     }
@@ -434,22 +407,22 @@ public class Modificar extends javax.swing.JFrame {
     private javax.swing.JButton btnMod;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> combDni;
-    private javax.swing.JComboBox<String> combSex;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel labelApeNom;
+    private javax.swing.JLabel labelDirec;
+    private javax.swing.JLabel labelFechaNac;
     private javax.swing.JLabel labelProf;
+    private javax.swing.JLabel labelSexo;
+    private javax.swing.JLabel labelTelef;
     private javax.swing.JRadioButton radAlum;
     private javax.swing.JRadioButton radDocen;
-    private javax.swing.JTextField txtDirec;
-    private javax.swing.JTextField txtNacim;
-    private javax.swing.JTextField txtNomApe;
-    private javax.swing.JTextField txtProf;
-    private javax.swing.JTextField txtTelef;
     // End of variables declaration//GEN-END:variables
 }

@@ -23,14 +23,6 @@
             "sexo": "Mujer",
             "dni": "74125632",
             "apellidosNombres": "ape ape nom nom"
-        },
-        {
-            "fechaNacimiento": "17/07/2007",
-            "direccion": "los dias",
-            "telefono": "212324124",
-            "sexo": "Mujer",
-            "dni": "80425214",
-            "apellidosNombres": "ape ape nom nom"
         }
     ],
     "docentes": [
@@ -59,15 +51,6 @@
             "sexo": "Hombre",
             "profesion": "arquitecto",
             "dni": "10425132",
-            "apellidosNombres": "ape ape nom nom"
-        },
-        {
-            "fechaNacimiento": "05/05/2005",
-            "direccion": "las calles",
-            "telefono": "123214521",
-            "sexo": "Mujer",
-            "profesion": "ingeniera",
-            "dni": "10242536",
             "apellidosNombres": "ape ape nom nom"
         }
     ]

@@ -25,6 +25,7 @@ public class Principal extends javax.swing.JFrame {
     Registro regis = new Registro();
     Listado lista = new Listado();
     Modificar modi = new Modificar();
+    Eliminar elimi = new Eliminar();
     /**
      * Creates new form Principal
      */
@@ -215,6 +216,8 @@ public class Principal extends javax.swing.JFrame {
         SwingUtilities.updateComponentTreeUI(fileSelect);
         regis.actualizarComponente();
         lista.actualizarComponente();
+        modi.actualizarComponente();
+        elimi.actualizarComponente();
     }//GEN-LAST:event_btnModoActionPerformed
     
     //-----------------------------------
@@ -236,6 +239,7 @@ public class Principal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Archivo cargado");
                 btnListado.setEnabled(true);
                 btnModificar.setEnabled(true);
+                btnEliminar.setEnabled(true);
             } else {
                 JOptionPane.showMessageDialog(this, "No se pudo cargar el archivo");
             }
@@ -246,11 +250,17 @@ public class Principal extends javax.swing.JFrame {
         modi.setVisible(true);
         modi.setArchivo(archivoSeleccionado);
         modi.rellenarDniAlumnos();
+        modi.establecerAlum();
         this.setVisible(false);
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        
+        elimi.setPrincipal(this);
+        elimi.setVisible(true);
+        elimi.setArchivo(archivoSeleccionado);
+        elimi.rellenarDniAlumnos();
+        elimi.establecerAlum();
+        this.setVisible(false);
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
