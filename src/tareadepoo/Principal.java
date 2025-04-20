@@ -24,6 +24,7 @@ public class Principal extends javax.swing.JFrame {
 
     Registro regis = new Registro();
     Listado lista = new Listado();
+    Modificar modi = new Modificar();
     /**
      * Creates new form Principal
      */
@@ -48,6 +49,8 @@ public class Principal extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         btnModo = new javax.swing.JButton();
         btnJson = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,7 +66,7 @@ public class Principal extends javax.swing.JFrame {
         });
 
         btnListado.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnListado.setText("Listado de personal");
+        btnListado.setText("Listado de Alumnos/Docentes");
         btnListado.setEnabled(false);
         btnListado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,6 +98,24 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        btnModificar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnModificar.setText("Modificar Alumno/Docente");
+        btnModificar.setEnabled(false);
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnEliminar.setText("Eliminar Alumno/Docente");
+        btnEliminar.setEnabled(false);
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -107,18 +128,20 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnModo)
+                                .addGap(114, 114, 114)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGap(202, 202, 202)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(btnListado, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnRegis, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnJson))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnModo)
-                                .addGap(115, 115, 115)
-                                .addComponent(jLabel1)))
-                        .addGap(0, 142, Short.MAX_VALUE)))
+                                    .addComponent(btnRegis, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(31, 31, 31)
+                                .addComponent(btnJson)))
+                        .addGap(0, 117, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -129,15 +152,19 @@ public class Principal extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(btnModo))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
+                        .addGap(25, 25, 25)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addComponent(btnRegis, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnListado, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnJson))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnListado, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -208,10 +235,23 @@ public class Principal extends javax.swing.JFrame {
                 archivoSeleccionado = fileSelect.getSelectedFile();
                 JOptionPane.showMessageDialog(this, "Archivo cargado");
                 btnListado.setEnabled(true);
+                btnModificar.setEnabled(true);
             } else {
                 JOptionPane.showMessageDialog(this, "No se pudo cargar el archivo");
             }
     }//GEN-LAST:event_btnJsonActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        modi.setPrincipal(this);
+        modi.setVisible(true);
+        modi.setArchivo(archivoSeleccionado);
+        modi.rellenarDniAlumnos();
+        this.setVisible(false);
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,8 +289,10 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnJson;
     private javax.swing.JButton btnListado;
+    private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnModo;
     private javax.swing.JButton btnRegis;
     private javax.swing.JFileChooser fileSelect;

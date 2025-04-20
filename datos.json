@@ -1,10 +1,10 @@
 {
     "alumnos": [
         {
-            "fechaNacimiento": "12/11/1998",
+            "fechaNacimiento": "12/11/1990",
             "direccion": "las calles",
             "telefono": "124235412",
-            "sexo": "Hombre",
+            "sexo": "Otro",
             "dni": "41254123",
             "apellidosNombres": "ape ape nom nom"
         },
@@ -14,11 +14,11 @@
             "telefono": "123321412",
             "sexo": "Mujer",
             "dni": "42521236",
-            "apellidosNombres": "ape ape nom nom"
+            "apellidosNombres": "wu lujan carrion alfredo"
         },
         {
             "fechaNacimiento": "07/07/1992",
-            "direccion": "los alamos",
+            "direccion": "los felinos",
             "telefono": "142124125",
             "sexo": "Mujer",
             "dni": "74125632",
@@ -47,8 +47,8 @@
             "fechaNacimiento": "07/08/1999",
             "direccion": "la encalada",
             "telefono": "123241254",
-            "sexo": "Hombre",
-            "profesion": "ingeniero",
+            "sexo": "Mujer",
+            "profesion": "ingeniera",
             "dni": "93658536",
             "apellidosNombres": "ape ape nom nom"
         },
