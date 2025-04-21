@@ -4,6 +4,7 @@
  */
 package tareadepoo;
 
+import utilidades.ArchivoJson;
 import java.io.File;
 import java.util.List;
 import javax.swing.SwingUtilities;
