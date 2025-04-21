@@ -1,4 +1,4 @@
-package tareadepoo;
+package utilidades;
 
 public class Validar {
 

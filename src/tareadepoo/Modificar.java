@@ -4,6 +4,8 @@
  */
 package tareadepoo;
 
+import utilidades.Validar;
+import utilidades.ArchivoJson;
 import java.io.File;
 import java.util.List;
 import javax.swing.JOptionPane;
