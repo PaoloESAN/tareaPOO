@@ -29,10 +29,6 @@ public class Listado extends javax.swing.JFrame {
     DefaultTableModel modeloAlum;
     DefaultTableModel modeloDoc;
             
-    String tipo;
-    public void setTipo(String tipo){
-        this.tipo = tipo;
-    }
     public Listado() {
         initComponents();
         this.setLocationRelativeTo(null);

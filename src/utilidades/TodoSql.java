@@ -213,4 +213,72 @@ public class TodoSql {
         }
         return docentes;
     }
+    public static void modificarAlumno(SqlDatos datos, Alumno alum){
+        String url = sqlUrl(datos);
+
+        String sql = "UPDATE Alumnos SET " +
+                     "Nombre_Completo = '" + alum.getApeNom() + "', " +
+                     "Fecha_de_Nacimiento = '" + alum.getFechaNac() + "', " +
+                     "Telefono = '" + alum.getTelef() + "', " +
+                     "Direccion = '" + alum.getDireccion() + "', " +
+                     "Sexo = '" + alum.getSexo() + "' " +
+                     "WHERE Dni = '" + alum.getDni() + "'";
+
+        try (
+            Connection conn = DriverManager.getConnection(url, datos.usuario, datos.contra);
+            Statement stmt = conn.createStatement()
+        ) {
+            stmt.executeUpdate(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public static void modificarDocente(SqlDatos datos, Docente docen){
+        String url = sqlUrl(datos);
+
+        String sql = "UPDATE Docentes SET " +
+                     "Nombre_Completo = '" + docen.getApeNom() + "', " +
+                     "Fecha_de_Nacimiento = '" + docen.getFechaNac() + "', " +
+                     "Telefono = '" + docen.getTelef() + "', " +
+                     "Direccion = '" + docen.getDireccion() + "', " +
+                     "Sexo = '" + docen.getSexo() + "' " +
+                     "WHERE Dni = '" + docen.getDni() + "'";
+
+        try (
+            Connection conn = DriverManager.getConnection(url, datos.usuario, datos.contra);
+            Statement stmt = conn.createStatement()
+        ) {
+            stmt.executeUpdate(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public static void eliminarAlumno(SqlDatos datos, String dni) {
+        String url = sqlUrl(datos);
+
+        String sql = "DELETE FROM Alumnos WHERE Dni = '" + dni + "'";
+
+        try (
+            Connection conn = DriverManager.getConnection(url, datos.usuario, datos.contra);
+            Statement stmt = conn.createStatement()
+        ) {
+            stmt.executeUpdate(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public static void eliminarDocente(SqlDatos datos, String dni) {
+        String url = sqlUrl(datos);
+
+        String sql = "DELETE FROM Docentes WHERE Dni = '" + dni + "'";
+
+        try (
+            Connection conn = DriverManager.getConnection(url, datos.usuario, datos.contra);
+            Statement stmt = conn.createStatement()
+        ) {
+            stmt.executeUpdate(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

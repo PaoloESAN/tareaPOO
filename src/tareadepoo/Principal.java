@@ -318,6 +318,8 @@ public class Principal extends javax.swing.JFrame {
             sqlHabilitado=true;
             btnRegis.setEnabled(true);
             btnListado.setEnabled(true);
+            btnModificar.setEnabled(true);
+            btnEliminar.setEnabled(true);
         }
     }//GEN-LAST:event_btnArchivoActionPerformed
     public void setSql(String server, String nombre, String contra){
@@ -333,10 +335,12 @@ public class Principal extends javax.swing.JFrame {
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         modi.setPrincipal(this);
         modi.setVisible(true);
-        if (!sqlHabilitado) {
-            modi.setArchivo(archivoSeleccionado);
+        if (sqlHabilitado && comboTipo.getSelectedItem().equals("Sql")) {
+            modi.setTipo("Sql");
+            modi.setDatos(new SqlDatos(servidorSql, nombreSql, contraSql, baseDeDatos ));
         }else{
-            
+            modi.setTipo("Json");
+            modi.setArchivo(archivoSeleccionado);
         }
         modi.rellenarDniAlumnos();
         modi.establecerAlum();
@@ -346,7 +350,13 @@ public class Principal extends javax.swing.JFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         elimi.setPrincipal(this);
         elimi.setVisible(true);
-        elimi.setArchivo(archivoSeleccionado);
+        if (sqlHabilitado && comboTipo.getSelectedItem().equals("Sql")) {
+            elimi.setTipo("Sql");
+            elimi.setDatos(new SqlDatos(servidorSql, nombreSql, contraSql, baseDeDatos ));
+        }else{
+            elimi.setTipo("Json");
+            elimi.setArchivo(archivoSeleccionado);
+        }
         elimi.rellenarDniAlumnos();
         elimi.establecerAlum();
         this.setVisible(false);
