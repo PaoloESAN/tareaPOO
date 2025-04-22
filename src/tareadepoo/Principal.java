@@ -294,7 +294,9 @@ public class Principal extends javax.swing.JFrame {
                 }
             }
             JDialog baseSql = new JDialog(this,"Configurar base de datos Sql",true);
-            baseSql.add(new DbSql(baseSql,this));
+            DbSql configBase = new DbSql(baseSql,this);
+            configBase.setSql(servidorSql, nombreSql, contraSql);
+            baseSql.add(configBase);
             baseSql.pack();
             baseSql.setLocationRelativeTo(this);
             baseSql.setVisible(true);
