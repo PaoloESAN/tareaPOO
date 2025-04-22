@@ -12,6 +12,8 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import personal.Alumno;
 import personal.Docente;
+import utilidades.SqlDatos;
+import utilidades.TodoSql;
 
 /**
  *
@@ -31,6 +33,14 @@ public class Modificar extends javax.swing.JFrame {
         this.archivo = archivo;
     }
     
+    private String tipo;
+    public void setTipo(String tipo){
+        this.tipo = tipo;
+    }
+    private SqlDatos datos;
+    public void setDatos(SqlDatos datos){
+        this.datos = datos;
+    }
     List<Alumno> listaAlum;
     List<Docente> listaDoc;
     boolean cargado=false;
@@ -317,10 +327,18 @@ public class Modificar extends javax.swing.JFrame {
         }else{
             if (radDocen.isSelected()) {
                 Docente docente = new Docente((String)combDni.getSelectedItem(), txtNomApe.getText(), txtNacim.getText(), txtTelef.getText(), txtDirec.getText(), (String)combSex.getSelectedItem(), txtProf.getText());
-                ArchivoJson.actualizarDocente(archivo, docente);
+                if (tipo.equals("Sql")) {
+                    TodoSql.modificarDocente(datos, docente);
+                }else{
+                    ArchivoJson.actualizarDocente(archivo, docente);
+                }
             }else{
                 Alumno alumno = new Alumno((String)combDni.getSelectedItem(), txtNomApe.getText(), txtNacim.getText(), txtTelef.getText(), txtDirec.getText(), (String)combSex.getSelectedItem());
-                ArchivoJson.actualizarAlumno(archivo, alumno);
+                if (tipo.equals("Sql")) {
+                    TodoSql.modificarAlumno(datos, alumno);
+                }else{
+                    ArchivoJson.actualizarAlumno(archivo, alumno);
+                }
             }
             JOptionPane.showMessageDialog(this, "Se modifcó correctamente");
             if(radDocen.isSelected()){
@@ -347,22 +365,38 @@ public class Modificar extends javax.swing.JFrame {
     public void rellenarDniAlumnos(){
         cargado = false;
         combDni.removeAllItems();
-        listaAlum = ArchivoJson.leerAlumnos(archivo);
-        Alumno primerAlum = listaAlum.get(0);
-        rellenarTodoAlumno(primerAlum);
-        for(Alumno alum : listaAlum){
-            combDni.addItem(alum.getDni());
+        if (tipo.equals("Sql")) {
+            listaAlum = TodoSql.obtenerAlumnos(datos);
+        }else{
+            listaAlum = ArchivoJson.leerAlumnos(archivo);
+        }
+        if (!listaAlum.isEmpty()) {
+            Alumno primerAlum = listaAlum.get(0);
+            rellenarTodoAlumno(primerAlum);
+            for(Alumno alum : listaAlum){
+                combDni.addItem(alum.getDni());
+            }
+        }else{
+            limpiar();
         }
         cargado = true;
     }
     public void rellenarDniDocentes(){
         cargado = false;
         combDni.removeAllItems();
-        listaDoc = ArchivoJson.leerDocentes(archivo);
-        Docente primerDoc = listaDoc.get(0);
-        rellenarTodoDocente(primerDoc);
-        for(Docente doc : listaDoc){
-            combDni.addItem(doc.getDni());
+        if (tipo.equals("Sql")) {
+            listaDoc = TodoSql.obtenerDocentes(datos);
+        }else{
+            listaDoc = ArchivoJson.leerDocentes(archivo);
+        }
+        if (!listaDoc.isEmpty()) {
+            Docente primerDoc = listaDoc.get(0);
+            rellenarTodoDocente(primerDoc);
+            for(Docente doc : listaDoc){
+                combDni.addItem(doc.getDni());
+            }
+        }else{
+            limpiar();
         }
         cargado = true;
     }

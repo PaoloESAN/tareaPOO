@@ -11,6 +11,8 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import personal.Alumno;
 import personal.Docente;
+import utilidades.SqlDatos;
+import utilidades.TodoSql;
 
 /**
  *
@@ -28,6 +30,15 @@ public class Eliminar extends javax.swing.JFrame {
     
     public void setArchivo(File archivo){
         this.archivo = archivo;
+    }
+    
+    private String tipo;
+    public void setTipo(String tipo){
+        this.tipo = tipo;
+    }
+    private SqlDatos datos;
+    public void setDatos(SqlDatos datos){
+        this.datos = datos;
     }
     
     List<Alumno> listaAlum;
@@ -299,10 +310,18 @@ public class Eliminar extends javax.swing.JFrame {
         int respuesta = JOptionPane.showConfirmDialog(this, "¿Estas seguro de eliminar este " + (radAlum.isSelected() ? "Alumno?" : "Docente?"),"Confirmar eliminación",JOptionPane.YES_OPTION);
         if (respuesta == JOptionPane.YES_OPTION) {
             if (radAlum.isSelected()) {
-                ArchivoJson.eliminarAlumno(archivo, (String) combDni.getSelectedItem());
+                if (tipo.equals("Sql")) {
+                    TodoSql.eliminarAlumno(datos, (String) combDni.getSelectedItem());
+                }else{
+                    ArchivoJson.eliminarAlumno(archivo, (String) combDni.getSelectedItem());
+                }
                 JOptionPane.showMessageDialog(this, "Alumno eliminado correctamente");
             }else{
-                ArchivoJson.eliminarDocente(archivo, (String) combDni.getSelectedItem());
+                if (tipo.equals("Sql")) {
+                    TodoSql.eliminarDocente(datos, (String) combDni.getSelectedItem());
+                }else{
+                    ArchivoJson.eliminarDocente(archivo, (String) combDni.getSelectedItem());
+                }
                 JOptionPane.showMessageDialog(this, "Docente eliminado correctamente");
             }
             if(radDocen.isSelected()){
@@ -318,22 +337,38 @@ public class Eliminar extends javax.swing.JFrame {
     public void rellenarDniAlumnos(){
         cargado = false;
         combDni.removeAllItems();
-        listaAlum = ArchivoJson.leerAlumnos(archivo);
-        Alumno primerAlum = listaAlum.get(0);
-        rellenarTodoAlumno(primerAlum);
-        for(Alumno alum : listaAlum){
-            combDni.addItem(alum.getDni());
+        if (tipo.equals("Sql")) {
+            listaAlum = TodoSql.obtenerAlumnos(datos);
+        }else{
+            listaAlum = ArchivoJson.leerAlumnos(archivo);
+        }
+        if (!listaAlum.isEmpty()) {
+            Alumno primerAlum = listaAlum.get(0);
+            rellenarTodoAlumno(primerAlum);
+            for(Alumno alum : listaAlum){
+                combDni.addItem(alum.getDni());
+            }
+        }else{
+            limpiar();
         }
         cargado = true;
     }
     public void rellenarDniDocentes(){
         cargado = false;
         combDni.removeAllItems();
-        listaDoc = ArchivoJson.leerDocentes(archivo);
-        Docente primerDoc = listaDoc.get(0);
-        rellenarTodoDocente(primerDoc);
-        for(Docente doc : listaDoc){
-            combDni.addItem(doc.getDni());
+        if (tipo.equals("Sql")) {
+            listaDoc = TodoSql.obtenerDocentes(datos);
+        }else{
+            listaDoc = ArchivoJson.leerDocentes(archivo);
+        }
+        if (!listaDoc.isEmpty()) {
+            Docente primerDoc = listaDoc.get(0);
+            rellenarTodoDocente(primerDoc);
+            for(Docente doc : listaDoc){
+                combDni.addItem(doc.getDni());
+            }
+        }else{
+            limpiar();
         }
         cargado = true;
     }
