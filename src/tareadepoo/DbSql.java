@@ -4,7 +4,10 @@
  */
 package tareadepoo;
 
+import java.util.List;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import utilidades.TodoSql;
 
 /**
  *
@@ -14,6 +17,18 @@ public class DbSql extends javax.swing.JPanel {
 
     JDialog padreDialog;
     Principal principal;
+    //-------------
+    //SQL INFO
+    //------------
+    String servidor;
+    String nombre;
+    String contra;
+    public void setSql(String servidor, String nombre, String contra){
+        this.servidor = servidor;
+        this.nombre = nombre;
+        this.contra = contra;
+    }
+    //------------
     public DbSql(JDialog padreDialog, Principal principal) {
         initComponents();
         this.padreDialog = padreDialog;
@@ -128,7 +143,12 @@ public class DbSql extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+        if (radCrear.isSelected()) {
+            
+        }else{
+            principal.setBaseDeDatos((String) comboDataBase.getSelectedItem());
+            JOptionPane.showMessageDialog(this, "Base de datos seleccionada correctamente");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void radCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radCrearActionPerformed
@@ -140,6 +160,13 @@ public class DbSql extends javax.swing.JPanel {
     private void radElegirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radElegirActionPerformed
         if (radElegir.isSelected()) {
             comboDataBase.setVisible(true);
+        }
+        comboDataBase.removeAllItems();
+        List<String> bases = TodoSql.listaDatabases(servidor, nombre, contra);
+        for(String base : bases){
+            if(!(base.equals("master") || base.equals("tempdb") || base.equals("model") || base.equals("msdb"))){
+                comboDataBase.addItem(base);
+            }
         }
     }//GEN-LAST:event_radElegirActionPerformed
 
