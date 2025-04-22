@@ -10,6 +10,7 @@ import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -26,9 +27,17 @@ public class Principal extends javax.swing.JFrame {
     Listado lista = new Listado();
     Modificar modi = new Modificar();
     Eliminar elimi = new Eliminar();
-    /**
-     * Creates new form Principal
-     */
+    
+    //-----------------------------
+    //CONFIGURACION SQL
+    //-----------------------------
+    boolean conexionSql = false;
+    String servidorSql="";
+    String nombreSql;
+    String contraSql;
+    String baseDeDatos;
+    //------------------------------
+    
     public Principal() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -49,9 +58,11 @@ public class Principal extends javax.swing.JFrame {
         btnListado = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         btnModo = new javax.swing.JButton();
-        btnJson = new javax.swing.JButton();
+        btnArchivo = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        comboTipo = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,10 +103,10 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        btnJson.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/json.png"))); // NOI18N
-        btnJson.addActionListener(new java.awt.event.ActionListener() {
+        btnArchivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/json.png"))); // NOI18N
+        btnArchivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnJsonActionPerformed(evt);
+                btnArchivoActionPerformed(evt);
             }
         });
 
@@ -117,6 +128,17 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        comboTipo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Json", "Sql" }));
+        comboTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboTipoActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setText("Tipo:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -127,45 +149,61 @@ public class Principal extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnModo)
-                                .addGap(114, 114, 114)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(202, 202, 202)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnListado, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnRegis, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(31, 31, 31)
-                                .addComponent(btnJson)))
-                        .addGap(0, 117, Short.MAX_VALUE)))
+                        .addContainerGap()
+                        .addComponent(btnModo)
+                        .addGap(114, 114, 114)
+                        .addComponent(jLabel1)
+                        .addGap(0, 196, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(202, 202, 202)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnListado, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRegis, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(58, 58, 58))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnArchivo)
+                        .addGap(73, 73, 73))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnModo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(btnRegis, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnJson))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(btnModo))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(25, 25, 25)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(14, 14, 14)
+                                .addComponent(btnRegis, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(99, 99, 99)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnArchivo)
+                        .addGap(55, 55, 55)))
                 .addComponent(btnListado, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -220,13 +258,14 @@ public class Principal extends javax.swing.JFrame {
         elimi.actualizarComponente();
     }//GEN-LAST:event_btnModoActionPerformed
     
-    //-----------------------------------
-    //ELEGIR UN ARCHIVO JSON
-    //-----------------------------------
+    //----------------------------------------------
+    //ELEGIR UN ARCHIVO JSON O SQL
+    //----------------------------------------------
     
     File archivoSeleccionado;
             
-    private void btnJsonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJsonActionPerformed
+    private void btnArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArchivoActionPerformed
+        if (comboTipo.getSelectedItem().equals("Json")) {
             fileSelect.setCurrentDirectory(new File(System.getProperty("user.dir")));
             FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos JSON (*.json)", "json");
             fileSelect.setFileFilter(filter);
@@ -243,8 +282,34 @@ public class Principal extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "No se pudo cargar el archivo");
             }
-    }//GEN-LAST:event_btnJsonActionPerformed
-
+        }else{
+            if (!conexionSql) {
+                JDialog mostrarSql = new JDialog(this,"Informacion Sql",true);
+                mostrarSql.add(new InfoSql(mostrarSql,this));
+                mostrarSql.pack();
+                mostrarSql.setLocationRelativeTo(this);
+                mostrarSql.setVisible(true);
+                if (servidorSql.equals("")) {
+                   return;
+                }
+            }
+            JDialog baseSql = new JDialog(this,"Configurar base de datos Sql",true);
+            baseSql.add(new DbSql(baseSql,this));
+            baseSql.pack();
+            baseSql.setLocationRelativeTo(this);
+            baseSql.setVisible(true);
+        }
+    }//GEN-LAST:event_btnArchivoActionPerformed
+    public void setSql(String server, String nombre, String contra){
+        this.servidorSql =server;
+        this.nombreSql = nombre;
+        this.contraSql = contra;
+        this.conexionSql = true;
+    }
+    public void setBaseDeDatos(String base){
+        this.baseDeDatos = base;
+    }
+    
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         modi.setPrincipal(this);
         modi.setVisible(true);
@@ -262,6 +327,14 @@ public class Principal extends javax.swing.JFrame {
         elimi.establecerAlum();
         this.setVisible(false);
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
+        if (comboTipo.getSelectedItem().equals("Sql")) {
+            btnArchivo.setIcon(new ImageIcon(getClass().getResource("/iconos/iconoSql.png")));
+        }else{
+            btnArchivo.setIcon(new ImageIcon(getClass().getResource("/iconos/json.png")));
+        }
+    }//GEN-LAST:event_comboTipoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -299,14 +372,16 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnArchivo;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnJson;
     private javax.swing.JButton btnListado;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnModo;
     private javax.swing.JButton btnRegis;
+    private javax.swing.JComboBox<String> comboTipo;
     private javax.swing.JFileChooser fileSelect;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }
