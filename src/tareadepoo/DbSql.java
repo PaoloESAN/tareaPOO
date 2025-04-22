@@ -52,6 +52,10 @@ public class DbSql extends javax.swing.JPanel {
         radElegir = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
         comboDataBase = new javax.swing.JComboBox<>();
+        txtBase = new javax.swing.JTextField();
+        labelNombre = new javax.swing.JLabel();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton2.setText("Cancelar");
@@ -60,9 +64,11 @@ public class DbSql extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(391, 300, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Base de datos SQL");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 23, -1, -1));
 
         buttonGroup1.add(radCrear);
         radCrear.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -73,6 +79,7 @@ public class DbSql extends javax.swing.JPanel {
                 radCrearActionPerformed(evt);
             }
         });
+        add(radCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(136, 66, -1, -1));
 
         buttonGroup1.add(radElegir);
         radElegir.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -82,6 +89,7 @@ public class DbSql extends javax.swing.JPanel {
                 radElegirActionPerformed(evt);
             }
         });
+        add(radElegir, new org.netbeans.lib.awtextra.AbsoluteConstraints(311, 66, -1, -1));
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton1.setText("Establecer base de datos");
@@ -90,52 +98,17 @@ public class DbSql extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, 241, -1));
 
         comboDataBase.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        add(comboDataBase, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 241, 40));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(176, 176, 176)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(136, 136, 136)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(radCrear)
-                                        .addGap(111, 111, 111)
-                                        .addComponent(radElegir))
-                                    .addComponent(comboDataBase, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(0, 117, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(radCrear)
-                    .addComponent(radElegir))
-                .addGap(33, 33, 33)
-                .addComponent(comboDataBase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(30, 30, 30)
-                .addComponent(jButton2)
-                .addContainerGap())
-        );
+        txtBase.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        add(txtBase, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 241, 40));
+
+        labelNombre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        labelNombre.setText("Nombre:");
+        add(labelNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 80, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -144,22 +117,48 @@ public class DbSql extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (radCrear.isSelected()) {
-            
+            if (txtBase.equals("")) {
+                JOptionPane.showMessageDialog(this, "Dale un nombre a la base de datos");
+                return;
+            }
+            crearDatabase();
         }else{
-            principal.setBaseDeDatos((String) comboDataBase.getSelectedItem());
-            JOptionPane.showMessageDialog(this, "Base de datos seleccionada correctamente");
+            String database = (String) comboDataBase.getSelectedItem();
+            comprobarDatabase(database);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    private void comprobarDatabase(String database){
+        if (TodoSql.tablasExisten(servidor, database, nombre, contra)) {
+            principal.setBaseDeDatos(database);
+            JOptionPane.showMessageDialog(this, "Base de datos seleccionada correctamente");
+            padreDialog.dispose();
+        }else{
+            JOptionPane.showMessageDialog(this, "Elige una base de datos que tenga las tablas Alumnos y Docentes");
+        }
+    }
+    private void crearDatabase(){
+        if(TodoSql.crearDatabase(servidor, nombre, contra, txtBase.getText())){
+            principal.setBaseDeDatos(txtBase.getText());
+            JOptionPane.showMessageDialog(this, "Base de datos creada correctamente");
+            padreDialog.dispose();
+        }else{
+            JOptionPane.showMessageDialog(this, "No se pudo crear la base de datos");
+        }
+    }
     private void radCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radCrearActionPerformed
         if (radCrear.isSelected()) {
             comboDataBase.setVisible(false);
+            labelNombre.setVisible(true);
+            txtBase.setVisible(true);
+            
         }
     }//GEN-LAST:event_radCrearActionPerformed
 
     private void radElegirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radElegirActionPerformed
         if (radElegir.isSelected()) {
             comboDataBase.setVisible(true);
+            labelNombre.setVisible(false);
+            txtBase.setVisible(false);
         }
         comboDataBase.removeAllItems();
         List<String> bases = TodoSql.listaDatabases(servidor, nombre, contra);
@@ -177,7 +176,9 @@ public class DbSql extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel labelNombre;
     private javax.swing.JRadioButton radCrear;
     private javax.swing.JRadioButton radElegir;
+    private javax.swing.JTextField txtBase;
     // End of variables declaration//GEN-END:variables
 }

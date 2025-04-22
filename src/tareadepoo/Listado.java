@@ -11,6 +11,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import personal.Alumno;
 import personal.Docente;
+import utilidades.SqlDatos;
+import utilidades.TodoSql;
 
 /**
  *
@@ -27,9 +29,10 @@ public class Listado extends javax.swing.JFrame {
     DefaultTableModel modeloAlum;
     DefaultTableModel modeloDoc;
             
-    /**
-     * Creates new form Listado
-     */
+    String tipo;
+    public void setTipo(String tipo){
+        this.tipo = tipo;
+    }
     public Listado() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -147,21 +150,39 @@ public class Listado extends javax.swing.JFrame {
     public void rellenarAmbas(File archivo){
         modeloAlum.setRowCount(0);
         modeloDoc.setRowCount(0);
-        rellenarTabla(archivo,"alumnos");
-        rellenarTabla(archivo,"docentes");
+        rellenarTablaJsonAlumnos(archivo);
+        rellenarTablaJsonDocentes(archivo);
+    }
+    public void rellenarAmbas(SqlDatos datos){
+        modeloAlum.setRowCount(0);
+        modeloDoc.setRowCount(0);
+        rellenarTablaSqlAlumnos(datos);
+        rellenarTablaSqlDocentes(datos);
     }
     
-    private void rellenarTabla(File ruta, String tipo){
-        if(tipo.equals("docentes")){
-            List<Docente> docentes = ArchivoJson.leerDocentes(ruta);
-            for(Docente doc : docentes){
-                modeloDoc.addRow(new Object[]{doc.getDni(), doc.getApeNom(), doc.getFechaNac(), doc.getTelef(), doc.getDireccion(), doc.getSexo(), doc.getProfesion()});
-            }
-        }else{
-            List<Alumno> alumnos = ArchivoJson.leerAlumnos(ruta);
-            for(Alumno alu : alumnos){
-                modeloAlum.addRow(new Object[]{alu.getDni(), alu.getApeNom(), alu.getFechaNac(),alu.getTelef(),alu.getDireccion(),alu.getSexo()});
-            }
+    private void rellenarTablaJsonAlumnos(File ruta){
+        List<Alumno> alumnos = ArchivoJson.leerAlumnos(ruta);
+        for(Alumno alu : alumnos){
+            modeloAlum.addRow(new Object[]{alu.getDni(), alu.getApeNom(), alu.getFechaNac(),alu.getTelef(),alu.getDireccion(),alu.getSexo()});
+        }
+    }
+    private void rellenarTablaJsonDocentes(File ruta){
+        List<Docente> docentes = ArchivoJson.leerDocentes(ruta);
+        for(Docente doc : docentes){
+            modeloDoc.addRow(new Object[]{doc.getDni(), doc.getApeNom(), doc.getFechaNac(), doc.getTelef(), doc.getDireccion(), doc.getSexo(), doc.getProfesion()});
+        }
+    }
+    
+    private void rellenarTablaSqlAlumnos(SqlDatos datos){
+        List<Alumno> alumnos = TodoSql.obtenerAlumnos(datos);
+        for(Alumno alu : alumnos){
+            modeloAlum.addRow(new Object[]{alu.getDni(), alu.getApeNom(), alu.getFechaNac(),alu.getTelef(),alu.getDireccion(),alu.getSexo()});
+        }
+    }
+    private void rellenarTablaSqlDocentes(SqlDatos datos){
+        List<Docente> docentes = TodoSql.obtenerDocentes(datos);
+        for(Docente doc : docentes){
+            modeloDoc.addRow(new Object[]{doc.getDni(), doc.getApeNom(), doc.getFechaNac(), doc.getTelef(), doc.getDireccion(), doc.getSexo(), doc.getProfesion()});
         }
     }
     

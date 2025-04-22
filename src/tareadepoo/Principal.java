@@ -16,6 +16,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import utilidades.SqlDatos;
 
 /**
  *
@@ -35,7 +36,8 @@ public class Principal extends javax.swing.JFrame {
     String servidorSql="";
     String nombreSql;
     String contraSql;
-    String baseDeDatos;
+    String baseDeDatos="";
+    boolean sqlHabilitado = false;
     //------------------------------
     
     public Principal() {
@@ -218,13 +220,23 @@ public class Principal extends javax.swing.JFrame {
     private void btnRegisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisActionPerformed
         regis.setPrincipal(this);
         regis.setVisible(true);
+        if (sqlHabilitado && comboTipo.getSelectedItem().equals("Sql")) {
+            regis.setSqlDat(new SqlDatos(servidorSql, nombreSql, contraSql, baseDeDatos));
+            regis.setTipo("Sql");
+        }else{
+            regis.setTipo("Json");
+        }
         this.setVisible(false);
     }//GEN-LAST:event_btnRegisActionPerformed
 
     private void btnListadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListadoActionPerformed
         lista.setPrincipal(this);
         lista.setVisible(true);
-        lista.rellenarAmbas(archivoSeleccionado);
+        if (sqlHabilitado && comboTipo.getSelectedItem().equals("Sql")) {
+            lista.rellenarAmbas(new SqlDatos(servidorSql, nombreSql, contraSql, baseDeDatos));
+        }else{
+            lista.rellenarAmbas(archivoSeleccionado);
+        }
         this.setVisible(false);
     }//GEN-LAST:event_btnListadoActionPerformed
    //---------------------------------------------
@@ -300,6 +312,12 @@ public class Principal extends javax.swing.JFrame {
             baseSql.pack();
             baseSql.setLocationRelativeTo(this);
             baseSql.setVisible(true);
+            if (baseDeDatos.equals("")) {
+                return;
+            }
+            sqlHabilitado=true;
+            btnRegis.setEnabled(true);
+            btnListado.setEnabled(true);
         }
     }//GEN-LAST:event_btnArchivoActionPerformed
     public void setSql(String server, String nombre, String contra){
@@ -315,7 +333,11 @@ public class Principal extends javax.swing.JFrame {
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         modi.setPrincipal(this);
         modi.setVisible(true);
-        modi.setArchivo(archivoSeleccionado);
+        if (!sqlHabilitado) {
+            modi.setArchivo(archivoSeleccionado);
+        }else{
+            
+        }
         modi.rellenarDniAlumnos();
         modi.establecerAlum();
         this.setVisible(false);
@@ -333,8 +355,10 @@ public class Principal extends javax.swing.JFrame {
     private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
         if (comboTipo.getSelectedItem().equals("Sql")) {
             btnArchivo.setIcon(new ImageIcon(getClass().getResource("/iconos/iconoSql.png")));
+            btnRegis.setEnabled(false);
         }else{
             btnArchivo.setIcon(new ImageIcon(getClass().getResource("/iconos/json.png")));
+            btnRegis.setEnabled(true);
         }
     }//GEN-LAST:event_comboTipoActionPerformed
 
