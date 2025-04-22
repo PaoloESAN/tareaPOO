@@ -12,6 +12,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import personal.Alumno;
 import personal.Docente;
+import utilidades.SqlDatos;
+import utilidades.TodoSql;
 
 /**
  *
@@ -24,9 +26,15 @@ public class Registro extends javax.swing.JFrame {
         this.principal = principal;
     }
     
-    /**
-     * Creates new form Registro
-     */
+    private String tipo;
+    public void setTipo(String tipo){
+        this.tipo = tipo;
+    }
+    private SqlDatos sqlDat;
+    public void setSqlDat(SqlDatos sqlDat){
+        this.sqlDat = sqlDat;
+    }
+    
     public Registro() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -219,30 +227,46 @@ public class Registro extends javax.swing.JFrame {
         if (!(respuesta.equals(""))) {
             JOptionPane.showMessageDialog(this, respuesta);
         }else{
-            
-            File archivo = selecGuardar();
-            
-            if (archivo == null){
-                JOptionPane.showMessageDialog(this, "Error al guardar el archivo");
-                return;
-            }
-            
-            if (radDocen.isSelected()) {
-                Docente docente = new Docente(txtDni.getText(), txtNomApe.getText(), txtNacim.getText(), txtTelef.getText(), txtDirec.getText(), (String)combSex.getSelectedItem(), txtProf.getText());
-                ArchivoJson.guardarJsonDocentes(archivo,docente);
-                
+            if (tipo.equals("Json")) {
+                usarJson();
             }else{
-                
-                Alumno alumno = new Alumno(txtDni.getText(), txtNomApe.getText(), txtNacim.getText(), txtTelef.getText(), txtDirec.getText(), (String)combSex.getSelectedItem());
-                ArchivoJson.guardarJsonAlumnos(archivo,alumno);
-                
-            }
-            
-            JOptionPane.showMessageDialog(rootPane, "Se registro correctamente");
-            limpiar();
+                usarSql();
+            }  
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void usarJson(){
+        File archivo = selecGuardar();
+            
+        if (archivo == null){
+            JOptionPane.showMessageDialog(this, "Error al guardar el archivo");
+            return;
+        }
+            
+        if (radDocen.isSelected()) {
+            Docente docente = new Docente(txtDni.getText(), txtNomApe.getText(), txtNacim.getText(), txtTelef.getText(), txtDirec.getText(), (String)combSex.getSelectedItem(), txtProf.getText());
+            ArchivoJson.guardarJsonDocentes(archivo,docente);
+                
+        }else{
+            Alumno alumno = new Alumno(txtDni.getText(), txtNomApe.getText(), txtNacim.getText(), txtTelef.getText(), txtDirec.getText(), (String)combSex.getSelectedItem());
+            ArchivoJson.guardarJsonAlumnos(archivo,alumno);   
+        }
+        JOptionPane.showMessageDialog(rootPane, "Se registro correctamente");
+        limpiar();
+    }
+    private void usarSql(){
+        if (radDocen.isSelected()) {
+            Docente docente = new Docente(txtDni.getText(), txtNomApe.getText(), txtNacim.getText(), txtTelef.getText(), txtDirec.getText(), (String)combSex.getSelectedItem(), txtProf.getText());
+            TodoSql.registrarDatosDocente(sqlDat, docente);
+            
+        }else{
+            Alumno alumno = new Alumno(txtDni.getText(), txtNomApe.getText(), txtNacim.getText(), txtTelef.getText(), txtDirec.getText(), (String)combSex.getSelectedItem());
+            TodoSql.registrarDatosAlumno(sqlDat, alumno);
+        }
+        JOptionPane.showMessageDialog(this, "Se registro correctamente");
+        limpiar();
+    }
+    
     private String erroresRespuesta(){
         Validar valid = new Validar();
         String respuesta = "";
