@@ -31,6 +31,14 @@
             "sexo": "Mujer",
             "dni": "80425214",
             "apellidosNombres": "ape ape nom nom"
+        },
+        {
+            "fechaNacimiento": "10/10/2010",
+            "direccion": "las calles",
+            "telefono": "123321412",
+            "sexo": "Hombre",
+            "dni": "10425242",
+            "apellidosNombres": "ape ape nom nom"
         }
     ],
     "docentes": [

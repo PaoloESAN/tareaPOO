@@ -1,0 +1,8 @@
+{"alumnos": [{
+    "fechaNacimiento": "10/10/1999",
+    "direccion": "los alamos",
+    "telefono": "123321412",
+    "sexo": "Mujer",
+    "dni": "10521245",
+    "apellidosNombres": "ape ape nom nom"
+}]}

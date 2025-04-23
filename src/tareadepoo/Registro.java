@@ -205,11 +205,14 @@ public class Registro extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_radDocenActionPerformed
 
+    //---------------------------
+    // BOTON VOLVER
+    //---------------------------
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        principal.setVisible(true);
+        principal.setVisible(true); 
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    //----------------------------
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         String respuesta=erroresRespuesta();
@@ -286,7 +289,9 @@ public class Registro extends javax.swing.JFrame {
         txtNomApe.setText("");
         combSex.setSelectedIndex(0);
     }
-    
+    //--------------------------------------
+    //REINCIA PARA CAMBIAR MODO OSCURO/CLARO
+    //--------------------------------------
     public void actualizarComponente(){
         SwingUtilities.updateComponentTreeUI(this);
         SwingUtilities.updateComponentTreeUI(fileSave);

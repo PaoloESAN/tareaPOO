@@ -37,7 +37,7 @@ public class Validar {
     }
     
     //---------------------------------------------------
-    //EXTRAIDO DEL ARCHIVO DE EJEMPLO
+    //EXTRAIDO DEL ARCHIVO DE EJEMPLO DEL PROFE
     //---------------------------------------------------
     
     private boolean ValidacionOK(String CADENA, String HKGZ,int SIZE1, int SIZE2, String RANGO) {
