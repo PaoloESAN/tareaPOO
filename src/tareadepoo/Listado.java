@@ -152,14 +152,16 @@ public class Listado extends javax.swing.JFrame {
     
     private void rellenarTabla(File ruta, String tipo){
         if(tipo.equals("docentes")){
-            List<Docente> docentes = ArchivoJson.leerDocentes(ruta);
-            for(Docente doc : docentes){
+            List<Docente> docentes = ArchivoJson.leerDocentes(ruta); //rellena la lista de docentes usando la funcion leerdocentes de la clase ArchivoJson
+            for(Docente doc : docentes){ //for i in docentes de python
                 modeloDoc.addRow(new Object[]{doc.getDni(), doc.getApeNom(), doc.getFechaNac(), doc.getTelef(), doc.getDireccion(), doc.getSexo(), doc.getProfesion()});
+                //agrega fila docentes
             }
         }else{
-            List<Alumno> alumnos = ArchivoJson.leerAlumnos(ruta);
+            List<Alumno> alumnos = ArchivoJson.leerAlumnos(ruta);//rellena la lista de alumnos usando la funcion leerdocentes de la clase ArchivoJson
             for(Alumno alu : alumnos){
                 modeloAlum.addRow(new Object[]{alu.getDni(), alu.getApeNom(), alu.getFechaNac(),alu.getTelef(),alu.getDireccion(),alu.getSexo()});
+                //agrega fila alumnos
             }
         }
     }
