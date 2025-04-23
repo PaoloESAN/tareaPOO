@@ -366,9 +366,19 @@ public class Principal extends javax.swing.JFrame {
         if (comboTipo.getSelectedItem().equals("Sql")) {
             btnArchivo.setIcon(new ImageIcon(getClass().getResource("/iconos/iconoSql.png")));
             btnRegis.setEnabled(false);
+            if (sqlHabilitado) {
+                btnRegis.setEnabled(true);
+                btnModificar.setEnabled(true);
+                btnEliminar.setEnabled(true);
+            }
         }else{
             btnArchivo.setIcon(new ImageIcon(getClass().getResource("/iconos/json.png")));
             btnRegis.setEnabled(true);
+            if (archivoSeleccionado != null) {
+                btnModificar.setEnabled(true);
+                btnEliminar.setEnabled(true);
+                btnListado.setEnabled(true);
+            }
         }
     }//GEN-LAST:event_comboTipoActionPerformed
 
