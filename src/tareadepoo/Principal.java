@@ -378,6 +378,10 @@ public class Principal extends javax.swing.JFrame {
                 btnModificar.setEnabled(true);
                 btnEliminar.setEnabled(true);
                 btnListado.setEnabled(true);
+            }else{
+                btnModificar.setEnabled(false);
+                btnEliminar.setEnabled(false);
+                btnListado.setEnabled(false);
             }
         }
     }//GEN-LAST:event_comboTipoActionPerformed
