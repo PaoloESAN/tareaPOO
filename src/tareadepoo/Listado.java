@@ -50,12 +50,12 @@ public class Listado extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaAlum = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        btnReporte = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaDoc = new javax.swing.JTable();
         radAlum = new javax.swing.JRadioButton();
         radDocen = new javax.swing.JRadioButton();
-        jPanel1 = new javax.swing.JPanel();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -76,14 +76,14 @@ public class Listado extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 810, 240));
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton2.setText("Volver");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnReporte.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnReporte.setText("Generar Reporte");
+        btnReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnReporteActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 380, -1, -1));
+        getContentPane().add(btnReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 370, -1, -1));
 
         tablaDoc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -120,15 +120,23 @@ public class Listado extends javax.swing.JFrame {
             }
         });
         getContentPane().add(radDocen, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, -1, -1));
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 430));
+
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton3.setText("Volver");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 380, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
         principal.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnReporteActionPerformed
 
     private void radAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radAlumActionPerformed
         if (radAlum.isSelected()) {
@@ -143,6 +151,10 @@ public class Listado extends javax.swing.JFrame {
             jScrollPane2.setVisible(true);
         }
     }//GEN-LAST:event_radDocenActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
     public void rellenarAmbas(File archivo){
         modeloAlum.setRowCount(0);
         modeloDoc.setRowCount(0);
@@ -221,10 +233,10 @@ public class Listado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnReporte;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JRadioButton radAlum;
