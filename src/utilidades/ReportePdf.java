@@ -26,7 +26,7 @@ public class ReportePdf {
 
         try {
             // creación del documento con sus márgenes
-            documento = new Document(PageSize.A4,35,30,50,50);
+            documento = new Document(PageSize.A4,20,20,50,50);
             
             // archivo pdf que vamos a generar
             String ruta = System.getProperty("user.dir");
