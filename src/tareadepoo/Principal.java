@@ -233,8 +233,12 @@ public class Principal extends javax.swing.JFrame {
         lista.setPrincipal(this);
         lista.setVisible(true);
         if (sqlHabilitado && comboTipo.getSelectedItem().equals("Sql")) {
+            lista.setTipo("Sql");
+            lista.setDatos(new SqlDatos(servidorSql, nombreSql, contraSql, baseDeDatos));
             lista.rellenarAmbas(new SqlDatos(servidorSql, nombreSql, contraSql, baseDeDatos));
         }else{
+            lista.setTipo("Json");
+            lista.setArchivo(archivoSeleccionado);
             lista.rellenarAmbas(archivoSeleccionado);
         }
         this.setVisible(false);

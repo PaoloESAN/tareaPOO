@@ -7,10 +7,12 @@ package tareadepoo;
 import utilidades.ArchivoJson;
 import java.io.File;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import personal.Alumno;
 import personal.Docente;
+import utilidades.ReportePdf;
 import utilidades.SqlDatos;
 import utilidades.TodoSql;
 
@@ -28,6 +30,19 @@ public class Listado extends javax.swing.JFrame {
     
     DefaultTableModel modeloAlum;
     DefaultTableModel modeloDoc;
+    
+    private String tipo;
+    public void setTipo(String tipo){
+        this.tipo = tipo;
+    }
+    private File archivo;
+    public void setArchivo(File archivo){
+        this.archivo = archivo;
+    }
+    private SqlDatos datos;
+    public void setDatos(SqlDatos datos){
+        this.datos = datos;
+    }
             
     public Listado() {
         initComponents();
@@ -55,7 +70,7 @@ public class Listado extends javax.swing.JFrame {
         tablaDoc = new javax.swing.JTable();
         radAlum = new javax.swing.JRadioButton();
         radDocen = new javax.swing.JRadioButton();
-        jButton3 = new javax.swing.JButton();
+        btnVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -121,21 +136,41 @@ public class Listado extends javax.swing.JFrame {
         });
         getContentPane().add(radDocen, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, -1, -1));
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton3.setText("Volver");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnVolver.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnVolver.setText("Volver");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnVolverActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 380, -1, -1));
+        getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 380, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
-        principal.setVisible(true);
-        this.setVisible(false);
+        ReportePdf reporte = new ReportePdf();
+        reporte.crearDocumento();
+        reporte.abrirDocumento();
+        reporte.agregarTitulo("REPORTE DE ALUMNOS Y DOCENTES");
+        reporte.agregarSaltosDeLinea();
+        reporte.agregarParrafo("Reporte de alumnos: ");
+        reporte.agregarSaltosDeLinea();
+        if (tipo.equals("Sql")) {
+            reporte.agregarTablaAlumnos(datos);
+            reporte.agregarSaltosDeLinea();
+            reporte.agregarParrafo("Reporte de docentes: ");
+            reporte.agregarSaltosDeLinea();
+            reporte.agregarTablaDocentes(datos);
+        }else{
+            reporte.agregarTablaAlumnos(archivo);
+            reporte.agregarSaltosDeLinea();
+            reporte.agregarParrafo("Reporte de docentes: ");
+            reporte.agregarSaltosDeLinea();
+            reporte.agregarTablaDocentes(archivo);
+        }
+        reporte.cerrarDocumento();
+        JOptionPane.showMessageDialog(this, "Reporte generado correctamente");
     }//GEN-LAST:event_btnReporteActionPerformed
 
     private void radAlumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radAlumActionPerformed
@@ -152,9 +187,10 @@ public class Listado extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_radDocenActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        principal.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnVolverActionPerformed
     public void rellenarAmbas(File archivo){
         modeloAlum.setRowCount(0);
         modeloDoc.setRowCount(0);
@@ -234,8 +270,8 @@ public class Listado extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnReporte;
+    private javax.swing.JButton btnVolver;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
