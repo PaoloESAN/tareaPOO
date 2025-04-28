@@ -23,6 +23,14 @@
             "sexo": "Mujer",
             "dni": "74125632",
             "apellidosNombres": "ape ape nom nom"
+        },
+        {
+            "fechaNacimiento": "10/02/1996",
+            "direccion": "satipo",
+            "telefono": "123321425",
+            "sexo": "Otro",
+            "dni": "10425232",
+            "apellidosNombres": "leonardo cahuaya caballero"
         }
     ],
     "docentes": [

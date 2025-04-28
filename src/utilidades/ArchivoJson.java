@@ -25,6 +25,11 @@ public class ArchivoJson {
         try {
             String jsonStr = new String(java.nio.file.Files.readAllBytes(archivo.toPath()));
             JSONObject personas = new JSONObject(jsonStr);
+            
+            if(!personas.has("alumnos")){
+                return new ArrayList<>();
+            }
+            
             arreglo = personas.getJSONArray("alumnos");
 
 
@@ -62,6 +67,9 @@ public class ArchivoJson {
         try {
             String jsonStr = new String(java.nio.file.Files.readAllBytes(archivo.toPath()));
             JSONObject personas = new JSONObject(jsonStr);
+            if(!personas.has("docentes")){
+                return new ArrayList<>();
+            }
             arreglo = personas.getJSONArray("docentes");
 
 
